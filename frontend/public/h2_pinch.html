@@ -1,0 +1,3630 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<!-- /*
+  =========================================================
+  * Project: H2 Pinch Analyzer - UI Styles
+  * Team: Free Palestene
+  * Institution: Suez University
+  * Copyright © 2026. All rights reserved.
+  =========================================================
+*/ -->
+
+<head>
+    <meta name="author" content="Free Palestene Team">
+    <meta name="copyright" content="Copyright © 2026 Free Palestene. All rights reserved.">
+    <meta name="description" content="H2 Pinch Analysis — Hydrogen Network Optimizer developed by Free Palestene Team">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>H2 Pinch Analysis — Hydrogen Network Optimizer</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/introjs.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/intro.min.js"></script>
+
+    <style>
+        :root {
+            --bg-app: #0b0d13;
+            --bg-shell: #121621;
+            --bg-panel: #1a202f;
+            --bg-panel2: #21283b;
+            --border: #2e3a55;
+            --border-hi: #3f4f75;
+            --accent: #3b82f6;
+            --accent-hi: #60a5fa;
+            --accent-glow: rgba(59, 130, 246, 0.3);
+            --green: #10b981;
+            --orange: #f97316;
+            --red: #ef4444;
+            --purple: #8b5cf6;
+            --yellow: #eab308;
+            --text-1: #f8fafc;
+            --text-2: #cbd5e1;
+            --text-3: #94a3b8;
+            --tab-h: 48px;
+            --titlebar-h: 60px;
+            --statusbar-h: 30px;
+        }
+
+        [data-theme="light"] {
+            --bg-app: #f1f5f9;
+            --bg-shell: #ffffff;
+            --bg-panel: #ffffff;
+            --bg-panel2: #f8fafc;
+            --border: #e2e8f0;
+            --border-hi: #cbd5e1;
+            --accent: #2563eb;
+            --accent-hi: #3b82f6;
+            --accent-glow: rgba(37, 99, 235, 0.2);
+            --text-1: #0f172a;
+            --text-2: #334155;
+            --text-3: #64748b;
+        }
+
+        [data-theme="green"] {
+            --bg-app: #f0fdf4;
+            --bg-shell: #ffffff;
+            --bg-panel: #ffffff;
+            --bg-panel2: #f8fafc;
+            --border: #bbf7d0;
+            --border-hi: #86efac;
+            --accent: #16a34a;
+            --accent-hi: #22c55e;
+            --accent-glow: rgba(22, 163, 74, 0.2);
+            --text-1: #14532d;
+            --text-2: #166534;
+            --text-3: #15803d;
+            --green: #15803d;
+            --purple: #059669;
+        }
+
+        [data-theme="corporate"] {
+            --bg-app: #0f172a;
+            --bg-shell: #1e293b;
+            --bg-panel: #1e293b;
+            --bg-panel2: #334155;
+            --border: #334155;
+            --border-hi: #475569;
+            --accent: #f59e0b;
+            --accent-hi: #fbbf24;
+            --accent-glow: rgba(245, 158, 11, 0.2);
+            --text-1: #f8fafc;
+            --text-2: #cbd5e1;
+            --text-3: #94a3b8;
+            --green: #10b981;
+            --purple: #f97316;
+        }
+
+        [data-theme="light"] .eng-table th,
+        [data-theme="green"] .eng-table th {
+            background: rgba(0, 0, 0, 0.04);
+            color: var(--text-2);
+            border-bottom-color: var(--border-hi);
+        }
+
+        [data-theme="light"] .eng-table tbody tr:hover td,
+        [data-theme="green"] .eng-table tbody tr:hover td {
+            background: rgba(0, 0, 0, 0.02);
+        }
+
+        [data-theme="light"] .eng-input,
+        [data-theme="green"] .eng-input,
+        [data-theme="light"] .eng-select,
+        [data-theme="green"] .eng-select {
+            background: rgba(0, 0, 0, 0.03);
+            border-color: var(--border-hi);
+            color: var(--text-1);
+        }
+
+        [data-theme="light"] .eng-input:focus,
+        [data-theme="green"] .eng-input:focus {
+            background: #ffffff;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px var(--accent-glow);
+        }
+
+        [data-theme="light"] .eng-input[readonly],
+        [data-theme="green"] .eng-input[readonly] {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        [data-theme="light"] .toggle-row,
+        [data-theme="green"] .toggle-row {
+            background: rgba(0, 0, 0, 0.03);
+        }
+
+        [data-theme="light"] #mynetwork,
+        [data-theme="green"] #mynetwork {
+            background: rgba(0, 0, 0, 0.02);
+            border: 1px solid var(--border-hi);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
+            background: var(--bg-app);
+            color: var(--text-1);
+            height: 100vh;
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        #app-wrapper {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            width: 100%;
+        }
+
+        #titlebar {
+            height: var(--titlebar-h);
+            background: var(--bg-shell);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            flex-shrink: 0;
+            overflow-x: auto;
+            scrollbar-width: none;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            z-index: 10;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        #titlebar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .titlebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .brand-icon {
+            width: 34px;
+            height: 34px;
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            box-shadow: 0 0 15px var(--accent-glow);
+            color: white;
+        }
+
+        .brand-name {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--text-1);
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .brand-ver {
+            font-size: 11px;
+            color: var(--accent-hi);
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 4px;
+            padding: 2px 6px;
+            white-space: nowrap;
+            font-weight: 700;
+            margin-inline-start: 4px;
+        }
+
+        .titlebar-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .tb-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            background: var(--bg-panel);
+            color: var(--text-2);
+            transition: all .2s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            font-family: inherit;
+        }
+
+        .tb-btn:hover {
+            background: var(--bg-panel2);
+            color: var(--text-1);
+            border-color: var(--border-hi);
+            transform: translateY(-1px);
+        }
+
+        .tb-btn.primary {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .tb-btn.primary:hover {
+            background: var(--accent-hi);
+            box-shadow: 0 4px 12px var(--accent-glow);
+            color: white;
+        }
+
+        .tb-btn.danger {
+            color: var(--red);
+        }
+
+        .tb-btn.danger:hover {
+            background: rgba(239, 68, 68, .15);
+            border-color: var(--red);
+            color: var(--red);
+        }
+
+        .tb-btn.info {
+            color: var(--purple);
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .tb-btn.info:hover {
+            background: rgba(139, 92, 246, 0.1);
+            color: var(--purple);
+            border-color: var(--purple);
+        }
+
+        .tb-btn.tour {
+            color: var(--yellow);
+            border-color: transparent;
+            background: transparent;
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        .tb-btn.tour:hover {
+            background: rgba(234, 179, 8, 0.1);
+        }
+
+        .tb-sep {
+            width: 1px;
+            height: 24px;
+            background: var(--border);
+            margin: 0 6px;
+        }
+
+        .tb-selector {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 6px 12px;
+            transition: all 0.3s;
+        }
+
+        .tb-selector label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-3);
+            white-space: nowrap;
+        }
+
+        .tb-selector select {
+            background: transparent;
+            border: none;
+            color: var(--text-1);
+            font-size: 12px;
+            font-weight: 700;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .tb-selector select option {
+            background: var(--bg-panel2);
+            color: var(--text-1);
+        }
+
+        .unit-select {
+            direction: ltr;
+            font-family: 'Consolas', monospace;
+        }
+
+        .theme-select,
+        .lang-select {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        #tabbar {
+            height: var(--tab-h);
+            background: var(--bg-shell);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: flex-end;
+            padding: 0 16px;
+            flex-shrink: 0;
+            gap: 4px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            z-index: 9;
+            transition: all 0.3s;
+        }
+
+        #tabbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            height: 40px;
+            padding: 0 16px;
+            border-radius: 8px 8px 0 0;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-bottom: none;
+            color: var(--text-3);
+            transition: all .2s ease;
+            white-space: nowrap;
+            position: relative;
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .tab:hover {
+            color: var(--text-1);
+            background: var(--bg-panel);
+        }
+
+        .tab.active {
+            background: var(--bg-app);
+            color: var(--accent-hi);
+            border-color: var(--border);
+            border-bottom: 1px solid var(--bg-app);
+            margin-bottom: -1px;
+        }
+
+        .tab.active .tab-icon {
+            color: var(--accent);
+        }
+
+        .tab-badge {
+            background: var(--accent);
+            color: white;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 2px 6px;
+            border-radius: 12px;
+            min-width: 18px;
+            text-align: center;
+            box-shadow: 0 0 10px var(--accent-glow);
+            margin-inline-start: 4px;
+        }
+
+        .tab-badge.hidden-badge {
+            display: none;
+        }
+
+        #content-area {
+            flex: 1;
+            position: relative;
+            background: var(--bg-app);
+            transition: background-color 0.3s ease;
+        }
+
+        .tab-pane {
+            position: absolute;
+            inset: 0;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 20px;
+            visibility: hidden;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.2s ease;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .tab-pane.active {
+            visibility: visible;
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .tab-pane::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .tab-pane::-webkit-scrollbar-track {
+            background: var(--bg-app);
+        }
+
+        .tab-pane::-webkit-scrollbar-thumb {
+            background: var(--border-hi);
+            border-radius: 4px;
+        }
+
+        .tab-pane::-webkit-scrollbar-thumb:hover {
+            background: var(--text-3);
+        }
+
+        #statusbar {
+            height: var(--statusbar-h);
+            background: var(--bg-shell);
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-3);
+            flex-shrink: 0;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green);
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: .4
+            }
+        }
+
+        .panel {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: var(--bg-panel2);
+            border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+
+        .panel-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--text-1);
+            white-space: nowrap;
+        }
+
+        .panel-title .icon {
+            color: var(--accent);
+            font-size: 16px;
+        }
+
+        .panel-body {
+            padding: 16px;
+        }
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .eng-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            min-width: 500px;
+        }
+
+        .eng-table th {
+            background: rgba(0, 0, 0, 0.2);
+            color: var(--text-3);
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            padding: 10px 12px;
+            text-align: start;
+            border-bottom: 2px solid var(--border);
+            white-space: nowrap;
+            transition: background-color 0.3s;
+        }
+
+        .eng-table td {
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-1);
+            vertical-align: middle;
+            transition: background-color 0.15s;
+        }
+
+        .eng-table tbody tr:hover td {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .eng-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .pinch-row td {
+            background: rgba(234, 179, 8, .1) !important;
+            color: var(--yellow) !important;
+            font-weight: 800;
+            border-bottom: 1px solid rgba(234, 179, 8, 0.3);
+        }
+
+        .eng-input {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-1);
+            padding: 8px 10px;
+            font-size: 13px;
+            outline: none;
+            transition: all .3s ease;
+            width: 100%;
+            font-family: 'Consolas', monospace;
+            min-height: 36px;
+        }
+
+        .eng-input:focus {
+            border-color: var(--accent);
+            background: var(--bg-app);
+            box-shadow: 0 0 0 2px var(--accent-glow);
+        }
+
+        .eng-input[readonly] {
+            color: var(--text-3);
+            cursor: not-allowed;
+            background: var(--bg-panel);
+        }
+
+        .eng-input[type="number"] {
+            direction: ltr;
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            appearance: textfield;
+            -moz-appearance: textfield;
+        }
+
+        .eng-select {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-1);
+            padding: 8px 10px;
+            font-size: 13px;
+            font-family: inherit;
+            font-weight: 600;
+            outline: none;
+            width: 100%;
+            min-height: 36px;
+            cursor: pointer;
+            transition: all .3s;
+        }
+
+        .eng-select:focus {
+            border-color: var(--accent);
+        }
+
+        .eng-select option {
+            background: var(--bg-panel2);
+        }
+
+        .eng-checkbox {
+            accent-color: var(--accent);
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        label {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .btn-sm {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            background: var(--bg-app);
+            color: var(--text-2);
+            transition: all .2s;
+            white-space: nowrap;
+        }
+
+        .btn-sm:hover {
+            background: var(--bg-panel2);
+            color: var(--text-1);
+            transform: translateY(-1px);
+            border-color: var(--border-hi);
+        }
+
+        .btn-sm.add {
+            color: var(--accent);
+            border-color: var(--accent);
+            background: var(--accent-glow);
+        }
+
+        .btn-sm.add:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-sm.excel {
+            color: var(--green);
+            border-color: var(--green);
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .btn-sm.excel:hover {
+            background: var(--green);
+            color: white;
+        }
+
+        .btn-sm.del {
+            color: var(--text-3);
+            border-color: transparent;
+            background: transparent;
+            padding: 6px;
+            border-radius: 4px;
+        }
+
+        .btn-sm.del:hover {
+            background: rgba(239, 68, 68, .15);
+            color: var(--red);
+        }
+
+        .run-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 28px;
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 800;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px var(--accent-glow);
+            letter-spacing: .5px;
+            width: auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .run-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px var(--accent-glow);
+        }
+
+        .run-btn:active {
+            transform: translateY(0);
+        }
+
+        .run-btn.loading {
+            color: transparent;
+            pointer-events: none;
+        }
+
+        .run-btn.loading::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        /* Comparison specific styles */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .comparison-table th {
+            background: var(--bg-panel2);
+            color: var(--text-2);
+            padding: 12px;
+            border: 1px solid var(--border-hi);
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .comparison-table td {
+            padding: 12px;
+            border: 1px solid var(--border);
+            color: var(--text-1);
+            font-size: 14px;
+            font-family: 'Consolas', monospace;
+        }
+
+        .comparison-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .winner-col {
+            background: rgba(16, 185, 129, 0.05) !important;
+            font-weight: 800;
+        }
+
+        .recommendation-box {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--green);
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .recommendation-box i {
+            font-size: 32px;
+            color: var(--green);
+        }
+
+        .recommendation-box p {
+            margin: 0;
+            color: var(--text-1);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: rgba(0, 0, 0, 0.15);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .toggle-row:hover {
+            border-color: var(--border-hi);
+        }
+
+        .toggle-row label {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-1);
+        }
+
+        .result-card {
+            background: linear-gradient(180deg, var(--bg-panel2), var(--bg-panel));
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+
+        .result-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--border-hi);
+        }
+
+        .result-card .rc-label {
+            font-size: 11px;
+            color: var(--text-3);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            margin-bottom: 8px;
+        }
+
+        .result-card .rc-value {
+            font-size: 26px;
+            font-weight: 800;
+            font-family: 'Consolas', monospace;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            direction: ltr;
+            text-align: start;
+        }
+
+        .result-card .rc-unit {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-3);
+            margin-top: 6px;
+        }
+
+        .rc-accent {
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+
+        .rc-accent .rc-value {
+            color: var(--accent-hi);
+        }
+
+        .rc-green {
+            border-color: rgba(16, 185, 129, 0.5);
+        }
+
+        .rc-green .rc-value {
+            color: var(--green);
+        }
+
+        .rc-red {
+            border-color: rgba(239, 68, 68, 0.5);
+        }
+
+        .rc-red .rc-value {
+            color: var(--red);
+        }
+
+        .rc-yellow {
+            border-color: rgba(234, 179, 8, 0.5);
+        }
+
+        .rc-yellow .rc-value {
+            color: var(--yellow);
+        }
+
+        .rc-purple {
+            border-color: rgba(139, 92, 246, 0.5);
+        }
+
+        .rc-purple .rc-value {
+            color: var(--purple);
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--text-2);
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--border-hi), transparent);
+        }
+
+        html[dir="rtl"] .section-title::after {
+            background: linear-gradient(270deg, var(--border-hi), transparent);
+        }
+
+        #mynetwork {
+            width: 100%;
+            height: 550px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        #toast-container {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            pointer-events: none;
+            max-width: 90vw;
+        }
+
+        html[dir="rtl"] #toast-container {
+            left: auto;
+            right: 20px;
+        }
+
+        .toast {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--bg-panel2);
+            border: 1px solid var(--border-hi);
+            border-left: 4px solid var(--accent);
+            border-radius: 8px;
+            padding: 12px 18px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .2);
+            animation: slideInLTR .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        html[dir="rtl"] .toast {
+            border-left: none;
+            border-right: 4px solid var(--accent);
+            animation: slideInRTL .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .toast.success {
+            border-color: var(--green);
+        }
+
+        .toast.error {
+            border-color: var(--red);
+        }
+
+        .toast.warning {
+            border-color: var(--yellow);
+        }
+
+        @keyframes slideInLTR {
+            from {
+                transform: translateX(-120%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRTL {
+            from {
+                transform: translateX(120%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: translateY(-10px) scale(0.95);
+            }
+        }
+
+        .toast.leaving {
+            animation: fadeOut .3s forwards;
+        }
+
+        .info-icon {
+            margin-inline-end: 6px;
+            color: var(--accent);
+            cursor: help;
+            font-size: 14px;
+            transition: color 0.2s;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.8;
+        }
+
+        .info-icon:hover {
+            opacity: 1;
+            color: var(--accent-hi);
+        }
+
+        .info-icon .tooltip {
+            visibility: hidden;
+            width: max-content;
+            max-width: 220px;
+            background-color: var(--bg-panel2);
+            color: var(--text-1);
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px 12px;
+            position: absolute;
+            z-index: 100;
+            bottom: 135%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s, bottom 0.3s;
+            font-size: 11px;
+            font-weight: 600;
+            font-family: 'Cairo', sans-serif;
+            border: 1px solid var(--border-hi);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            pointer-events: none;
+            line-height: 1.5;
+            white-space: normal;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        .info-icon .tooltip::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -6px;
+            border-width: 6px;
+            border-style: solid;
+            border-color: var(--border-hi) transparent transparent transparent;
+        }
+
+        .info-icon:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+            bottom: 150%;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .8);
+            z-index: 500;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(8px);
+            padding: 20px;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+            animation: modalFadeIn 0.2s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-box {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-hi);
+            border-radius: 12px;
+            padding: 24px;
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, .7);
+            animation: modalSlideUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal-box::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal-box::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .modal-box::-webkit-scrollbar-thumb {
+            background: var(--border-hi);
+            border-radius: 3px;
+        }
+
+        @keyframes modalSlideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+        }
+
+        .modal-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--text-1);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-3);
+            font-size: 20px;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .modal-close:hover {
+            color: var(--red);
+            background: rgba(239, 68, 68, .1);
+        }
+
+        .modal-textarea {
+            width: 100%;
+            height: 180px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px dashed var(--border-hi);
+            border-radius: 8px;
+            color: var(--text-1);
+            font-family: 'Consolas', monospace;
+            font-size: 13px;
+            padding: 12px;
+            outline: none;
+            resize: none;
+            direction: ltr;
+            transition: border-color 0.2s;
+        }
+
+        .modal-textarea:focus {
+            border-color: var(--accent);
+            border-style: solid;
+            background: var(--bg-app);
+        }
+
+        .layout-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .grid-half {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .grid-3 {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        .grid-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .grid-5 {
+            grid-template-columns: repeat(5, 1fr);
+        }
+
+        .form-row {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-label {
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--text-3);
+            text-transform: uppercase;
+            letter-spacing: .4px;
+            display: flex;
+            align-items: center;
+        }
+
+        #results-hint,
+        #network-hint,
+        #curve-hint,
+        #table-hint {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            min-height: 400px;
+            gap: 16px;
+            color: var(--text-3);
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px dashed var(--border);
+            border-radius: 12px;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+
+        .hint-icon {
+            font-size: 56px;
+            color: var(--border-hi);
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+
+        #results-hint:hover .hint-icon,
+        #network-hint:hover .hint-icon {
+            color: var(--accent);
+        }
+
+        .hint-text {
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 1.6;
+            color: var(--text-2);
+        }
+
+        /* Intro.js dynamic RTL/LTR */
+        html[dir="rtl"] .introjs-tooltip {
+            direction: rtl !important;
+            text-align: right !important;
+        }
+
+        html[dir="ltr"] .introjs-tooltip {
+            direction: ltr !important;
+            text-align: left !important;
+        }
+
+        .introjs-tooltip {
+            font-family: 'Cairo', sans-serif !important;
+            background-color: var(--bg-panel) !important;
+            color: var(--text-1) !important;
+            border: 1px solid var(--border-hi) !important;
+            border-radius: 8px !important;
+        }
+
+        .introjs-button {
+            font-family: 'Cairo', sans-serif !important;
+            text-shadow: none !important;
+            background: var(--bg-panel2) !important;
+            color: var(--text-1) !important;
+            border: 1px solid var(--border) !important;
+        }
+
+        .introjs-button:hover {
+            background: var(--border-hi) !important;
+        }
+
+        .introjs-arrow {
+            border-color: var(--bg-panel) !important;
+        }
+
+        .introjs-arrow.top {
+            border-bottom-color: var(--bg-panel) !important;
+        }
+
+        @media (max-width: 900px) {
+            .grid-4 {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .grid-5 {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #titlebar {
+                padding: 0 12px;
+            }
+
+            .brand-name {
+                display: none;
+            }
+
+            .tb-btn span {
+                display: none;
+            }
+
+            .tb-btn {
+                padding: 8px 10px;
+            }
+
+            .tb-selector label {
+                display: none;
+            }
+
+            .tab-pane {
+                padding: 12px;
+            }
+
+            .layout-grid {
+                grid-template-columns: 1fr !important;
+                gap: 16px;
+            }
+
+            .panel-body-run {
+                flex-direction: column;
+                align-items: stretch !important;
+            }
+
+            .run-btn {
+                width: 100%;
+                margin-top: 12px;
+                padding: 16px;
+                font-size: 16px;
+            }
+
+            .panel-title {
+                font-size: 14px;
+            }
+
+            .result-card .rc-value {
+                font-size: 22px;
+            }
+
+            #mynetwork {
+                height: 400px;
+            }
+
+            canvas {
+                min-height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .status-item span.hide-mobile {
+                display: none;
+            }
+
+            .titlebar-actions {
+                gap: 6px;
+            }
+
+            .tb-sep {
+                margin: 0 4px;
+            }
+
+            .tab {
+                padding: 0 12px;
+                font-size: 12px;
+            }
+        }
+
+        /* PDF / Print Container */
+        #print-container {
+            display: none;
+            background: white;
+            color: black;
+            padding: 40px;
+            font-family: 'Cairo', sans-serif;
+            width: 800px;
+            margin: 0;
+            /* لغينا الـ auto عشان ميترحلش */
+            position: absolute;
+            /* تثبيت الحاوية في أعلى اليسار */
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            /* عشان يغطي على أي حاجة وقت الاستخراج */
+            box-sizing: border-box;
+        }
+
+        html[dir="rtl"] #print-container {
+            direction: rtl;
+            text-align: right;
+            left: auto;
+            right: 0;
+        }
+
+        html[dir="ltr"] #print-container {
+            direction: ltr;
+            text-align: left;
+        }
+
+        @media print {
+            body {
+                background: white !important;
+                height: auto !important;
+                overflow: visible !important;
+                margin: 0;
+                padding: 0;
+            }
+
+            #app-wrapper,
+            #toast-container,
+            .modal-overlay,
+            .introjs-overlay {
+                display: none !important;
+            }
+
+            #print-container {
+                display: block !important;
+                position: relative !important;
+                /* نرجعه نسبي في الطباعة العادية */
+                width: 100% !important;
+                padding: 0 !important;
+            }
+
+            @page {
+                margin: 15mm;
+                size: A4 portrait;
+            }
+        }
+
+        html[dir="rtl"] #print-container {
+            direction: rtl;
+            text-align: right;
+        }
+
+        html[dir="ltr"] #print-container {
+            direction: ltr;
+            text-align: left;
+        }
+
+        @media print {
+            body {
+                background: white !important;
+                height: auto !important;
+                overflow: visible !important;
+                margin: 0;
+                padding: 0;
+            }
+
+            #app-wrapper,
+            #toast-container,
+            .modal-overlay,
+            .introjs-overlay {
+                display: none !important;
+            }
+
+            #print-container {
+                display: block !important;
+                width: 100% !important;
+                padding: 0 !important;
+            }
+
+            @page {
+                margin: 15mm;
+                size: A4 portrait;
+            }
+        }
+
+        .print-page-break {
+            page-break-before: always;
+            break-before: page;
+        }
+
+        .pr-header {
+            margin-bottom: 30px;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pr-title {
+            font-size: 26px;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .pr-subtitle {
+            font-size: 15px;
+            color: #3b82f6;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .pr-meta-info {
+            font-size: 13px;
+            color: #475569;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .pr-logo-box {
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pr-logo-box img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .pr-section {
+            margin-bottom: 35px;
+        }
+
+        .pr-sec-title-container {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+
+        .pr-sec-title-main {
+            font-size: 18px;
+            font-weight: 800;
+            color: #3b82f6;
+        }
+
+        .pr-sec-title-sub {
+            font-size: 13px;
+            color: #64748b;
+            font-family: monospace;
+        }
+
+        .pr-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .pr-card {
+            width: 48%;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 15px;
+            background: #f8fafc;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .pr-card-lbl {
+            font-size: 14px;
+            color: #475569;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .pr-card-val {
+            font-size: 22px;
+            font-weight: 800;
+            font-family: monospace;
+            color: #0f172a;
+            direction: ltr;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .pr-unit {
+            font-size: 13px;
+            color: #64748b;
+            font-family: 'Cairo', sans-serif;
+            display: inline-block;
+            margin-inline-end: 5px;
+            font-weight: normal;
+        }
+
+        .pr-card-val.green {
+            color: #16a34a;
+        }
+
+        .pr-card-val.red {
+            color: #dc2626;
+        }
+
+        .pr-card-val.purple {
+            color: #8b5cf6;
+        }
+
+        .pr-img-container {
+            text-align: center;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 15px;
+            background: #fff;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 220mm;
+            box-sizing: border-box;
+        }
+
+        .pr-img-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .pr-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            font-family: monospace;
+            margin-bottom: 20px;
+        }
+
+        html[dir="rtl"] .pr-table {
+            direction: rtl;
+        }
+
+        html[dir="ltr"] .pr-table {
+            direction: ltr;
+        }
+
+        .pr-table th {
+            background: #f1f5f9;
+            color: #334155;
+            padding: 8px;
+            border: 1px solid #94a3b8;
+            font-weight: bold;
+            font-family: 'Cairo', sans-serif;
+            text-align: center;
+        }
+
+        .pr-table td {
+            padding: 6px;
+            border: 1px solid #cbd5e1;
+            color: #0f172a;
+            text-align: center;
+            direction: ltr;
+        }
+
+        .pr-table tr.pinch {
+            background: #fef9c3 !important;
+            font-weight: bold;
+        }
+
+        .pr-notes-box {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 20px;
+            font-size: 14px;
+            color: #0f172a;
+            white-space: pre-wrap;
+            line-height: 1.8;
+        }
+
+        .pr-comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            text-align: center;
+            font-family: monospace;
+        }
+
+        html[dir="rtl"] .pr-comparison-table {
+            direction: rtl;
+        }
+
+        html[dir="ltr"] .pr-comparison-table {
+            direction: ltr;
+        }
+
+        .pr-comparison-table th {
+            background: #f1f5f9;
+            color: #334155;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            font-weight: bold;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .pr-comparison-table td {
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            color: #0f172a;
+            direction: ltr;
+            font-size: 14px;
+        }
+
+        .pr-comparison-table .winner-col {
+            background: #f0fdf4 !important;
+            font-weight: 800;
+            color: #16a34a;
+        }
+
+        .pr-recommendation {
+            background: #f0fdf4;
+            border: 1px solid #22c55e;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #14532d;
+            font-family: 'Cairo', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app-wrapper">
+        <div id="toast-container"></div>
+
+        <div id="excelModal" class="modal-overlay no-print">
+            <div class="modal-box">
+                <div class="modal-header">
+                    <span class="modal-title"><i class="fa-solid fa-file-excel" style="color:var(--green)"></i>
+                        &nbsp;<span data-i18n="excel_title">Quick Import from Excel</span></span>
+                    <button class="modal-close" onclick="closeModal('excelModal')"><i
+                            class="fa-solid fa-xmark"></i></button>
+                </div>
+                <p style="font-size:13px; color:var(--text-2); margin-bottom:12px; font-weight:600;"><span
+                        data-i18n="excel_desc">Copy data from Excel (Ctrl+C) and paste it here (Ctrl+V) — Required
+                        order:</span> <br><span
+                        style="color:var(--accent-hi); background:rgba(59,130,246,0.1); padding:2px 6px; border-radius:4px; display:inline-block; margin-top:6px; font-family:'Consolas', monospace; font-size: 12px;"
+                        data-i18n="excel_format">Name | Flow | Impurity% | Pressure bar</span></p>
+                <textarea class="modal-textarea" id="excelPasteArea" data-i18n-placeholder="excel_placeholder"
+                    placeholder="Paste Excel data here..."></textarea>
+                <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:16px;">
+                    <button class="btn-sm" onclick="closeModal('excelModal')" data-i18n="btn_cancel">Cancel</button>
+                    <button class="btn-sm add" id="btnConfirmPaste" style="padding: 8px 16px;"><i
+                            class="fa-solid fa-check"></i> <span data-i18n="btn_import">Import Data</span></button>
+                </div>
+            </div>
+        </div>
+
+        <div id="metaModal" class="modal-overlay no-print">
+            <div class="modal-box" style="max-width: 500px;">
+                <div class="modal-header">
+                    <span class="modal-title"><i class="fa-solid fa-address-card" style="color:var(--purple)"></i>
+                        &nbsp;<span data-i18n="meta_title">Project Details</span></span>
+                    <button class="modal-close" onclick="closeModal('metaModal')"><i
+                            class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="layout-grid" style="grid-template-columns: 1fr; gap: 12px;">
+                    <div class="form-row"><span class="form-label" data-i18n="meta_proj_name">Project Name</span><input
+                            type="text" id="meta_projectName" class="eng-input" data-i18n-placeholder="meta_proj_ph"
+                            placeholder="e.g. H2 Network Optimization 2024"></div>
+                    <div class="form-row"><span class="form-label" data-i18n="meta_comp_name">Company / Refinery
+                            Name</span><input type="text" id="meta_companyName" class="eng-input"
+                            data-i18n-placeholder="meta_comp_ph" placeholder="e.g. Alexandria Petroleum Co."></div>
+                    <div class="form-row"><span class="form-label" data-i18n="meta_eng_name">Engineer Name</span><input
+                            type="text" id="meta_engineerName" class="eng-input" data-i18n-placeholder="meta_eng_ph"
+                            placeholder="e.g. Eng. Ahmed"></div>
+                    <div class="form-row" style="margin-top: 8px;"><span class="form-label" data-i18n="meta_notes">Notes
+                            / Conclusions</span><textarea id="meta_notes" class="eng-input"
+                            style="height: 80px; resize: vertical;" data-i18n-placeholder="meta_notes_ph"
+                            placeholder="Write any notes or recommendations..."></textarea></div>
+                    <div class="form-row" style="margin-top: 8px;">
+                        <span class="form-label" data-i18n="meta_logo">Company Logo</span>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <input type="file" id="meta_logo_input"
+                                accept="image/png, image/jpeg, image/jpg, image/svg+xml" style="display:none;"
+                                onchange="handleLogoUpload(event)">
+                            <button class="btn-sm" onclick="document.getElementById('meta_logo_input').click()"><i
+                                    class="fa-solid fa-upload"></i> <span data-i18n="btn_choose_img">Choose
+                                    Image</span></button>
+                            <button class="btn-sm del" onclick="removeLogo()" id="btn_remove_logo" style="display:none;"
+                                data-i18n-title="btn_delete_logo" title="Delete Logo"><i
+                                    class="fa-solid fa-trash"></i></button>
+                        </div>
+                        <div id="logo_preview_container"
+                            style="margin-top: 10px; display: none; width: 120px; height: 120px; border: 1px dashed var(--border-hi); border-radius: 8px; overflow: hidden; align-items: center; justify-content: center; background: rgba(255,255,255,0.05);">
+                            <img id="logo_preview_img" src=""
+                                style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                        </div>
+                    </div>
+                </div>
+                <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+                    <button class="btn-sm" onclick="closeModal('metaModal')" data-i18n="btn_cancel">Cancel</button>
+                    <button class="btn-sm add" onclick="saveMetaModal()"
+                        style="padding: 8px 16px; background: var(--purple); color: white; border-color: var(--purple);"><i
+                            class="fa-solid fa-check"></i> <span data-i18n="btn_save_data">Save Details</span></button>
+                </div>
+            </div>
+        </div>
+
+        <div id="titlebar">
+            <div class="titlebar-brand" id="tour-step-1">
+                <div class="brand-icon"><i class="fa-solid fa-code-branch"></i></div>
+                <span class="brand-name">H2 Pinch Analyzer</span>
+            </div>
+            <div class="titlebar-actions" id="tour-step-6">
+                <button class="tb-btn tour" onclick="startTour()" data-i18n-title="title_tour" title="Restart Tour"><i
+                        class="fa-solid fa-circle-question"></i></button>
+                <div class="tb-sep"></div>
+
+                <!-- Language Selector -->
+                <div class="tb-selector">
+                    <label><i class="fa-solid fa-language"
+                            style="color:var(--accent); margin-inline-start:4px; margin-inline-end:4px;"></i></label>
+                    <select id="langSelector" class="lang-select" onchange="setLanguage(this.value)">
+                        <option value="en">English</option>
+                        <option value="ar">العربية (Arabic)</option>
+                    </select>
+                </div>
+
+                <div class="tb-selector">
+                    <label><i class="fa-solid fa-palette"
+                            style="color:var(--accent); margin-inline-start:4px; margin-inline-end:4px;"></i></label>
+                    <select id="themeSelector" class="theme-select" onchange="changeTheme(this.value)">
+                        <option value="dark" data-i18n="theme_dark">Dark</option>
+                        <option value="light" data-i18n="theme_light">Light (Industrial)</option>
+                        <option value="green" data-i18n="theme_green">Clean Energy</option>
+                        <option value="corporate" data-i18n="theme_corp">Corporate</option>
+                    </select>
+                </div>
+                <div class="tb-selector">
+                    <label><i class="fa-solid fa-scale-balanced"
+                            style="color:var(--accent); margin-inline-start:4px; margin-inline-end:4px;"></i></label>
+                    <select id="unitSelector" class="unit-select" onchange="handleUnitChange(this.value)">
+                        <option value="Kgmol/hr">Kgmol/hr</option>
+                        <option value="MMSCFD">MMSCFD</option>
+                        <option value="Nm3/hr">Nm³/hr</option>
+                        <option value="kg/hr">kg/hr</option>
+                    </select>
+                </div>
+                <div class="tb-sep"></div>
+                <button class="tb-btn info" onclick="openMetaModal()" data-i18n-title="title_meta"
+                    title="Project Details"><i class="fa-solid fa-address-card"></i></button>
+                <button class="tb-btn danger" onclick="clearAllData()" data-i18n-title="title_new"
+                    title="New Project"><i class="fa-solid fa-file-circle-plus"></i></button>
+                <button class="tb-btn" onclick="triggerLoadProject()" data-i18n-title="title_open"
+                    title="Open Project (JSON)"><i class="fa-solid fa-folder-open"></i></button>
+                <input type="file" id="fileInput" accept=".json" class="hidden" onchange="loadProject(event)"
+                    style="display:none">
+                <button class="tb-btn primary" onclick="saveProject()" data-i18n-title="title_save"
+                    title="Save Project"><i class="fa-solid fa-save"></i> <span
+                        data-i18n="btn_save">Save</span></button>
+                <div class="tb-sep"></div>
+                <button class="tb-btn" onclick="handlePrintAction()" data-i18n-title="title_print"
+                    title="Print Report"><i class="fa-solid fa-print"></i></button>
+                <button class="tb-btn" onclick="handlePDFAction()" data-i18n-title="title_pdf" title="Export PDF"><i
+                        class="fa-solid fa-file-pdf" style="color:var(--red); font-size: 14px;"></i></button>
+            </div>
+        </div>
+
+        <div id="tabbar" id="tour-step-5">
+            <div class="tab active" onclick="switchTab('tab-data')" id="t-data"><i
+                    class="fa-solid fa-database tab-icon"></i> <span data-i18n="tab_data">Basic Input</span></div>
+            <div class="tab" onclick="switchTab('tab-config')" id="t-config"><i
+                    class="fa-solid fa-sliders tab-icon"></i> <span data-i18n="tab_config">Cost Config
+                    (OPEX/CAPEX)</span></div>
+            <div class="tab" onclick="switchTab('tab-results')" id="t-results"><i
+                    class="fa-solid fa-chart-bar tab-icon"></i> <span data-i18n="tab_results">Results &
+                    Feasibility</span><span class="tab-badge hidden-badge" id="badge-results">✓</span></div>
+            <div class="tab" onclick="switchTab('tab-network')" id="t-network"><i
+                    class="fa-solid fa-project-diagram tab-icon"></i> <span data-i18n="tab_network">Optimized
+                    Network</span><span class="tab-badge hidden-badge" id="badge-network">✓</span></div>
+            <div class="tab" onclick="switchTab('tab-curve')" id="t-curve"><i
+                    class="fa-solid fa-chart-area tab-icon"></i> <span data-i18n="tab_curve">Composite Curve</span><span
+                    class="tab-badge hidden-badge" id="badge-curve">✓</span></div>
+            <div class="tab" onclick="switchTab('tab-table')" id="t-table"><i class="fa-solid fa-table tab-icon"></i>
+                <span data-i18n="tab_table">Cascade Table</span><span class="tab-badge hidden-badge"
+                    id="badge-table">✓</span>
+            </div>
+        </div>
+
+        <div id="content-area">
+            <!-- TAB 1: DATA INPUT -->
+            <div class="tab-pane active" id="tab-data">
+                <div class="layout-grid grid-half" style="margin-bottom:16px;">
+                    <div class="panel" id="tour-step-2">
+                        <div class="panel-header">
+                            <span class="panel-title"><i class="fa-solid fa-industry icon"></i> <span
+                                    data-i18n="panel_src">Sources</span></span>
+                            <div class="no-print" style="display:flex; gap:8px;">
+                                <button class="btn-sm excel" onclick="openExcelModal('src')"><i
+                                        class="fa-solid fa-paste"></i> <span data-i18n="btn_excel">Excel</span></button>
+                                <button class="btn-sm add" onclick="addSource()"><i class="fa-solid fa-plus"></i> <span
+                                        data-i18n="btn_add_src">Add Source</span></button>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="eng-table" id="sourcesTable">
+                                <thead>
+                                    <tr>
+                                        <th data-i18n="th_name">Name</th>
+                                        <th><span data-i18n="th_flow">Flow</span> <span class="flow-unit-label"
+                                                style="font-weight:600; font-size:10px;">(Kgmol/hr)</span></th>
+                                        <th data-i18n="th_imp">Impurity (%)</th>
+                                        <th class="pressure-col" style="display:none; color:var(--accent)"
+                                            data-i18n="th_pres">Pressure (bar)</th>
+                                        <th style="width:40px;" class="no-print"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="sourcesBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="panel" id="tour-step-3">
+                        <div class="panel-header">
+                            <span class="panel-title"><i class="fa-solid fa-filter" style="color:var(--orange)"></i>
+                                <span data-i18n="panel_snk">Sinks (Consumers)</span></span>
+                            <div class="no-print" style="display:flex; gap:8px;">
+                                <button class="btn-sm excel" onclick="openExcelModal('snk')"><i
+                                        class="fa-solid fa-paste"></i> <span data-i18n="btn_excel">Excel</span></button>
+                                <button class="btn-sm add" onclick="addSink()"
+                                    style="color:var(--orange); border-color:var(--orange); background: rgba(249,115,22,0.05);"><i
+                                        class="fa-solid fa-plus"></i> <span data-i18n="btn_add_snk">Add
+                                        Sink</span></button>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="eng-table" id="sinksTable">
+                                <thead>
+                                    <tr>
+                                        <th data-i18n="th_name">Name</th>
+                                        <th><span data-i18n="th_req">Required</span> <span class="flow-unit-label"
+                                                style="font-weight:600; font-size:10px;">(Kgmol/hr)</span></th>
+                                        <th data-i18n="th_max_imp">Max Impurity (%)</th>
+                                        <th class="pressure-col" style="display:none; color:var(--accent)"
+                                            data-i18n="th_pres">Pressure (bar)</th>
+                                        <th style="width:40px;" class="no-print"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="sinksBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel no-print" id="tour-step-4">
+                    <div class="panel-body panel-body-run"
+                        style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;">
+                        <div
+                            style="display:flex; align-items:center; gap:12px; background: rgba(0,0,0,0.05); padding: 12px; border-radius: 8px; border: 1px solid var(--border);">
+                            <span class="form-label" style="margin:0; flex-direction: row;">
+                                <span class="info-icon"><i class="fa-solid fa-circle-info"></i><span class="tooltip"
+                                        data-i18n="tt_fresh_imp">Allowed impurity percentage in the external fresh
+                                        hydrogen source.</span></span>
+                                <span data-i18n="lbl_fresh_imp">Fresh H2 Impurity (%):</span>
+                            </span>
+                            <input type="number" min="0" max="100" id="fresh_impurity" value="5.0" step="0.1"
+                                onchange="validateLimits(this,0,100)" class="eng-input"
+                                style="width:90px; direction:ltr; text-align: center; font-size: 15px; font-weight: bold;">
+                        </div>
+                        <div style="display: flex; gap: 12px; align-items: center;">
+                            <div class="toggle-row"
+                                style="background: rgba(16,185,129,0.1); border-color: var(--green);">
+                                <input type="checkbox" class="eng-checkbox" id="enable_comparison" checked>
+                                <label for="enable_comparison" style="color: var(--green);"><i
+                                        class="fa-solid fa-code-compare"></i> <span data-i18n="lbl_compare">Compare:
+                                        Membrane vs PSA</span></label>
+                            </div>
+                            <button class="run-btn" id="mainRunBtn" onclick="triggerRunAnalysis()">
+                                <i class="fa-solid fa-calculator"></i> <span data-i18n="btn_run">Run Engineering
+                                    Analysis</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: CONFIG -->
+            <div class="tab-pane" id="tab-config">
+                <div style="display:flex; flex-direction:column; gap:20px;">
+                    <div class="panel">
+                        <div class="panel-header"><span class="panel-title"><i class="fa-solid fa-gauge-high icon"></i>
+                                <span data-i18n="panel_comp">Pressure Constraints & Compressors</span></span></div>
+                        <div class="panel-body" style="display:flex; flex-direction:column; gap:16px;">
+                            <div class="toggle-row"><input type="checkbox" class="eng-checkbox" id="enable_pressure"
+                                    onchange="togglePressure()"><label for="enable_pressure"
+                                    data-i18n="lbl_en_pres">Enable pressure constraints and calculate compressor
+                                    power</label></div>
+                            <div id="comp_settings_panel"
+                                style="display:none; padding: 16px; background: rgba(0,0,0,0.05); border-radius: 8px; border: 1px dashed var(--border);">
+                                <div class="layout-grid grid-3">
+                                    <div class="form-row"><span class="form-label" data-i18n="lbl_comp_eff">Compressor
+                                            Efficiency (%)</span><input type="number" min="10" max="100" id="comp_eff"
+                                            value="75" onchange="validateLimits(this,10,100)" class="eng-input"
+                                            style="direction:ltr;"></div>
+                                    <div class="form-row"><span class="form-label" data-i18n="lbl_comp_temp">Inlet
+                                            Temperature (K)</span><input type="number" min="200" max="600"
+                                            id="comp_temp" value="300" onchange="validateLimits(this,200,600)"
+                                            class="eng-input" style="direction:ltr;"></div>
+                                    <div class="form-row"><span class="form-label" data-i18n="lbl_elec_cost">Electricity
+                                            Cost ($/kWh)</span><input type="number" min="0" step="0.01" id="elec_cost"
+                                            value="0.05" onchange="validateLimits(this,0,10)" class="eng-input"
+                                            style="direction:ltr;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-header"><span class="panel-title"><i class="fa-solid fa-recycle"
+                                    style="color:var(--purple)"></i> <span data-i18n="panel_pur">Purification
+                                    Unit</span></span></div>
+                        <div class="panel-body" style="display:flex; flex-direction:column; gap:16px;">
+                            <div class="toggle-row"><input type="checkbox" class="eng-checkbox" id="enable_purifier"
+                                    onchange="togglePurifier()"><label for="enable_purifier"
+                                    data-i18n="lbl_en_pur">Enable purification unit to recover H2 from purge gas</label>
+                            </div>
+                            <div id="purifier_settings"
+                                style="display:none; padding: 16px; background: rgba(0,0,0,0.05); border-radius: 8px; border: 1px dashed var(--border);">
+                                <div class="layout-grid grid-4" style="align-items:end; margin-bottom: 16px;">
+                                    <div class="form-row"><span class="form-label"
+                                            data-i18n="lbl_pur_tech">Technology</span><select id="purifier_type"
+                                            onchange="changePurifierType()" class="eng-select">
+                                            <option value="membrane" data-i18n="opt_mem">Membrane</option>
+                                            <option value="psa" data-i18n="opt_psa">PSA</option>
+                                            <option value="custom" data-i18n="opt_custom">Custom</option>
+                                        </select></div>
+                                    <div class="form-row"><span class="form-label" data-i18n="lbl_pur_feed_pres">Feed
+                                            Pressure (bar)</span><input type="number" min="1" id="pur_feed_pres"
+                                            value="100" class="eng-input"
+                                            onchange="changePurifierType(); validateLimits(this,1,null);"
+                                            style="direction:ltr; font-weight:bold;"></div>
+                                    <div class="form-row"><span class="form-label" data-i18n="lbl_pur_feed_flow">Feed
+                                            Flow</span><input type="text" id="pur_feed_flow" value="Auto" readonly
+                                            class="eng-input" style="direction:ltr; color: var(--accent-hi);"></div>
+                                    <div class="form-row"><span class="form-label" data-i18n="lbl_pur_feed_imp">Feed
+                                            Impurity (%)</span><input type="text" id="pur_feed_imp" value="Auto"
+                                            readonly class="eng-input" style="direction:ltr; color: var(--accent-hi);">
+                                    </div>
+                                </div>
+                                <div class="layout-grid grid-4" style="align-items:end;">
+                                    <div class="form-row"><span class="form-label" data-i18n="lbl_pur_prod_imp">Product
+                                            Impurity (%)</span><input type="number" min="0" max="100" id="pur_prod_imp"
+                                            value="2.0" step="0.1" class="eng-input"
+                                            onchange="validateLimits(this,0,100)" readonly style="direction:ltr;"></div>
+                                    <div class="form-row"><span class="form-label" data-i18n="lbl_pur_prod_pres">Product
+                                            Pressure (bar)</span><input type="number" min="1" id="pur_prod_pres"
+                                            value="30" class="eng-input" onchange="validateLimits(this,1,null)"
+                                            style="direction:ltr; color:var(--green); font-weight:bold;"></div>
+                                    <div class="form-row"><span class="form-label" data-i18n="lbl_pur_tail_imp">Tail Gas
+                                            Impurity (%)</span><input type="number" min="0" max="100" id="pur_tail_imp"
+                                            value="89.11" step="0.01" class="eng-input"
+                                            onchange="validateLimits(this,0,100)" readonly style="direction:ltr;"></div>
+                                    <div class="form-row"><span class="form-label" data-i18n="lbl_pur_tail_pres">Tail
+                                            Gas Pressure (bar)</span><input type="number" min="1" id="pur_tail_pres"
+                                            value="95" class="eng-input" onchange="validateLimits(this,1,null)"
+                                            style="direction:ltr; color:var(--red); font-weight:bold;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel" style="border-color: rgba(139,92,246,0.3);">
+                        <div class="panel-header" style="background: rgba(139,92,246,0.05);"><span
+                                class="panel-title"><i class="fa-solid fa-sack-dollar" style="color:var(--purple)"></i>
+                                <span data-i18n="panel_capex">Capital Cost (CAPEX) & Maintenance</span></span></div>
+                        <div class="panel-body">
+                            <p style="font-size: 12px; color: var(--text-3); margin-bottom: 16px; line-height: 1.5;"
+                                data-i18n="desc_capex">CAPEX is calculated programmatically using the Six-Tenths Rule.
+                            </p>
+
+                            <div
+                                style="margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: rgba(0,0,0,0.02);">
+                                <span class="section-title"
+                                    style="margin-bottom: 12px; font-size: 12px; color: var(--purple);"
+                                    data-i18n="sub_pur">Purification Unit</span>
+                                <div class="layout-grid grid-4">
+                                    <div class="form-row"><span class="form-label" data-i18n="lbl_base_cost">Base Cost
+                                            ($)</span><input type="number" min="0" id="capex_pur_base_cost"
+                                            value="2500000" class="eng-input" style="direction:ltr;"></div>
+                                    <div class="form-row"><span class="form-label"><span data-i18n="lbl_base_cap">Base
+                                                Capacity</span> <span class="flow-unit-label"
+                                                style="font-size: 10px;"></span></span><input type="number" min="1"
+                                            id="capex_pur_base_cap" value="1000" class="eng-input"
+                                            style="direction:ltr;"></div>
+                                    <div class="form-row"><span class="form-label" data-i18n="lbl_scale">Scale Factor
+                                            (n)</span><input type="number" min="0.1" max="1.5" step="0.01"
+                                            id="capex_pur_scale" value="0.85" class="eng-input" style="direction:ltr;">
+                                    </div>
+                                    <div class="form-row"><span class="form-label" data-i18n="lbl_maint">Annual Maint.
+                                            (% OPEX)</span><input type="number" min="0" max="100" step="0.1"
+                                            id="opex_pur_percent" value="8.0" class="eng-input"
+                                            style="direction:ltr; color: var(--yellow); font-weight: bold;"></div>
+                                </div>
+                            </div>
+
+                            <div
+                                style="margin-bottom: 8px; padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: rgba(0,0,0,0.02);">
+                                <span class="section-title"
+                                    style="margin-bottom: 12px; font-size: 12px; color: var(--accent);"
+                                    data-i18n="sub_comp">Compressors</span>
+                                <div class="layout-grid grid-4">
+                                    <div class="form-row"><span class="form-label" data-i18n="lbl_base_cost">Base Cost
+                                            ($)</span><input type="number" min="0" id="capex_comp_base_cost"
+                                            value="1500000" class="eng-input" style="direction:ltr;"></div>
+                                    <div class="form-row"><span class="form-label" data-i18n="lbl_base_kw">Base Power
+                                            (kW)</span><input type="number" min="1" id="capex_comp_base_cap"
+                                            value="1000" class="eng-input" style="direction:ltr;"></div>
+                                    <div class="form-row"><span class="form-label" data-i18n="lbl_scale">Scale Factor
+                                            (n)</span><input type="number" min="0.1" max="1.5" step="0.01"
+                                            id="capex_comp_scale" value="0.65" class="eng-input" style="direction:ltr;">
+                                    </div>
+                                    <div class="form-row"><span class="form-label" data-i18n="lbl_maint">Annual Maint.
+                                            (% OPEX)</span><input type="number" min="0" max="100" step="0.1"
+                                            id="opex_comp_percent" value="4.0" class="eng-input"
+                                            style="direction:ltr; color: var(--yellow); font-weight: bold;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-header"><span class="panel-title"><i class="fa-solid fa-dollar-sign"
+                                    style="color:var(--green)"></i> <span data-i18n="panel_opex">Operating Costs
+                                    (OPEX)</span></span></div>
+                        <div class="panel-body">
+                            <div class="layout-grid grid-3">
+                                <div class="form-row"><span class="form-label" data-i18n="lbl_fresh_cost">Fresh H2 Cost
+                                        ($ / unit)</span><input type="number" min="0" id="fresh_h2_cost" value="2.5"
+                                        step="0.1" onchange="validateLimits(this,0,null)" class="eng-input"
+                                        style="direction:ltr; font-weight:bold; color:var(--green);"></div>
+                                <div class="form-row"><span class="form-label" data-i18n="lbl_fuel_val">Purge Fuel Value
+                                        ($ / unit)</span><input type="number" min="0" id="fuel_value" value="0.5"
+                                        step="0.1" onchange="validateLimits(this,0,null)" class="eng-input"
+                                        style="direction:ltr;"></div>
+                                <div class="form-row"><span class="form-label" data-i18n="lbl_op_hrs">Operating Hours
+                                        (hr/yr)</span><input type="number" min="1000" max="8760" id="op_hours"
+                                        value="8000" onchange="validateLimits(this,1000,8760)" class="eng-input"
+                                        style="direction:ltr;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: RESULTS -->
+            <div class="tab-pane" id="tab-results">
+                <div id="results-hint"><i class="fa-solid fa-microchip hint-icon"></i><span class="hint-text"
+                        data-i18n="hint_results">Waiting for engineering engine execution...</span></div>
+                <div id="results-content" style="display:none; flex-direction:column; gap:24px;">
+
+                    <!-- Comparison Section -->
+                    <div id="comparison-section" style="display: none;">
+                        <div class="section-title" style="color: var(--green);"><i class="fa-solid fa-code-compare"></i>
+                            <span data-i18n="sec_comp_eval">Comparative Analysis & Evaluation (Membrane vs PSA)</span>
+                        </div>
+                        <div
+                            style="background: var(--bg-panel); border: 1px solid var(--border); border-radius: 10px; padding: 16px; overflow-x: auto;">
+                            <table class="comparison-table" id="comparisonTable">
+                                <!-- Filled via JS -->
+                            </table>
+                            <div id="recommendationBox" class="recommendation-box">
+                                <!-- Filled via JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="section-title"><i class="fa-solid fa-bullseye"></i> <span
+                                data-i18n="sec_targets">Pinch Targets</span> <span id="current-tech-badge"
+                                style="font-size: 11px; background: rgba(59,130,246,0.2); padding: 2px 6px; border-radius: 4px; color: var(--accent-hi); margin-inline-start: 10px;"></span>
+                        </div>
+                        <div class="layout-grid grid-half">
+                            <div class="result-card rc-accent">
+                                <div class="rc-label" data-i18n="rc_fresh">Minimum Fresh Target</div>
+                                <div class="rc-value"><span id="res_fresh">—</span></div>
+                                <div class="rc-unit flow-unit-label">Kgmol/hr</div>
+                            </div>
+                            <div class="result-card rc-red">
+                                <div class="rc-label" data-i18n="rc_purge">Final Purge Gas</div>
+                                <div class="rc-value"><span id="res_purge">—</span></div>
+                                <div class="rc-unit flow-unit-label">Kgmol/hr</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="section-title"><i class="fa-solid fa-chart-pie"></i> <span
+                                data-i18n="sec_feasibility">Feasibility & Cost Summary</span></div>
+                        <div class="layout-grid grid-3" style="margin-bottom: 16px;">
+                            <div class="result-card rc-purple">
+                                <div class="rc-label" data-i18n="rc_capex_pur">CAPEX: Purification Unit</div>
+                                <div class="rc-value" style="font-size:22px;">$ <span id="res_capex_pur">0.00</span>
+                                </div>
+                                <div class="rc-unit" data-i18n="rcu_capex_pur">Cost of Separation Unit</div>
+                            </div>
+                            <div class="result-card rc-purple">
+                                <div class="rc-label" data-i18n="rc_capex_comp">CAPEX: New Compressors</div>
+                                <div class="rc-value" style="font-size:22px;">$ <span id="res_capex_comp">0.00</span>
+                                </div>
+                                <div class="rc-unit" data-i18n="rcu_capex_comp">Cost of Compressors</div>
+                            </div>
+                            <div class="result-card" style="border-color: var(--text-2); background: rgba(0,0,0,0.2);">
+                                <div class="rc-label" data-i18n="rc_capex_total">Total CAPEX</div>
+                                <div class="rc-value" style="font-size:26px; color: var(--text-1);">$ <span
+                                        id="res_capex_total">0.00</span></div>
+                                <div class="rc-unit" data-i18n="rcu_capex_total">Total Capital Investment</div>
+                            </div>
+                        </div>
+                        <div class="layout-grid grid-4">
+                            <div class="result-card">
+                                <div class="rc-label" data-i18n="rc_opex_base">Old Network OPEX</div>
+                                <div class="rc-value" style="font-size:20px; color:var(--text-2);">$ <span
+                                        id="res_base_opex">—</span></div>
+                                <div class="rc-unit">/<span class="time-basis-lbl">hr</span> <span
+                                        data-i18n="rcu_mat_cost">(Material Cost)</span></div>
+                            </div>
+                            <div class="result-card rc-accent">
+                                <div class="rc-label"><span data-i18n="rc_opex_new">New Network OPEX</span> <span
+                                        class="info-icon"><i class="fa-solid fa-circle-info"></i><span class="tooltip"
+                                            data-i18n="tt_opex_new">Includes: Cost of Fresh H2 - Fuel value of Purge +
+                                            Compressor power + Annual maintenance for new equipment.</span></span></div>
+                                <div class="rc-value" style="font-size:20px;">$ <span id="res_final_h2_opex">—</span>
+                                </div>
+                                <div class="rc-unit">/<span class="time-basis-lbl">hr</span> <span
+                                        data-i18n="rcu_inc_maint">(Inc. Maint & Elec)</span></div>
+                            </div>
+                            <div class="result-card" id="card_save_hr">
+                                <div class="rc-label" data-i18n="rc_savings">Net OPEX Savings</div>
+                                <div class="rc-value" style="font-size: 22px;"><span
+                                        id="res_save_hr_sign">+$</span><span id="res_save_hr">—</span> <span
+                                        style="font-size: 12px; color:var(--text-3);">/<span
+                                            class="time-basis-lbl">hr</span></span></div>
+                                <div class="rc-unit"
+                                    style="font-size:13px; font-weight:800; color:var(--text-1); opacity:0.8;"><span
+                                        data-i18n="rcu_yearly">Yearly:</span> <span id="res_save_yr_sign"></span>$<span
+                                        id="res_save_yr">—</span></div>
+                            </div>
+                            <div class="result-card" id="card_payback"
+                                style="background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(16,185,129,0.2)); border-color: var(--green);">
+                                <div class="rc-label" data-i18n="rc_payback">Payback Period</div>
+                                <div class="rc-value" style="font-size: 28px; color: var(--green);"><span
+                                        id="res_payback">—</span></div>
+                                <div class="rc-unit" data-i18n="rcu_years">Years</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4: NETWORK -->
+            <div class="tab-pane" id="tab-network">
+                <div id="network-hint"><i class="fa-solid fa-project-diagram hint-icon"></i><span class="hint-text"
+                        data-i18n="hint_network">Network diagram currently unavailable.</span></div>
+                <div id="network-content" style="display:none;">
+                    <div class="panel">
+                        <div class="panel-header">
+                            <span class="panel-title"><i class="fa-solid fa-project-diagram icon"></i> <span
+                                    data-i18n="panel_net_diag">Interactive Network Diagram</span></span>
+                            <div style="display:flex; gap:8px;"><button class="btn-sm" onclick="zoomNetwork(0.2)"
+                                    data-i18n-title="btn_zoom_in" title="Zoom In"><i
+                                        class="fa-solid fa-magnifying-glass-plus"></i></button><button class="btn-sm"
+                                    onclick="zoomNetwork(-0.2)" data-i18n-title="btn_zoom_out" title="Zoom Out"><i
+                                        class="fa-solid fa-magnifying-glass-minus"></i></button><button class="btn-sm"
+                                    onclick="fitNetwork()" data-i18n-title="btn_fit" title="Fit to Screen"><i
+                                        class="fa-solid fa-expand"></i></button>
+                                <div class="tb-sep" style="height: 18px; margin-top:4px;"></div><button
+                                    class="btn-sm excel"
+                                    onclick="exportCanvasAsPNG('#mynetwork canvas', 'Network_Diagram.png')"><i
+                                        class="fa-solid fa-image"></i> <span data-i18n="btn_save_img">Save
+                                        Image</span></button>
+                            </div>
+                        </div>
+                        <div class="panel-body" style="padding:0;">
+                            <div id="mynetwork"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 5: CURVE -->
+            <div class="tab-pane" id="tab-curve">
+                <div id="curve-hint"><i class="fa-solid fa-chart-area hint-icon"></i><span class="hint-text"
+                        data-i18n="hint_curve">Composite Curve pending...</span></div>
+                <div id="curve-content" style="display:none;">
+                    <div class="panel">
+                        <div class="panel-header"><span class="panel-title"><i class="fa-solid fa-chart-area icon"></i>
+                                <span data-i18n="panel_curve">Composite Curve</span></span><button class="btn-sm excel"
+                                onclick="exportCanvasAsPNG('#pinchChart', 'Composite_Curve.png')"><i
+                                    class="fa-solid fa-image"></i> <span data-i18n="btn_save_img">Save
+                                    Image</span></button></div>
+                        <div class="panel-body">
+                            <div
+                                style="height:60vh; min-height:400px; position:relative; background:var(--bg-app); border-radius:8px; padding:12px; border: 1px solid var(--border); transition: background-color 0.3s ease;">
+                                <canvas id="pinchChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 6: TABLE -->
+            <div class="tab-pane" id="tab-table">
+                <div id="table-hint"><i class="fa-solid fa-table hint-icon"></i><span class="hint-text"
+                        data-i18n="hint_table">Cascade Table unavailable.</span></div>
+                <div id="table-content" style="display:none;">
+                    <div class="panel">
+                        <div class="panel-header"><span class="panel-title"><i class="fa-solid fa-table icon"></i> <span
+                                    data-i18n="panel_cascade">Problem Table Algorithm</span></span></div>
+                        <div class="table-responsive">
+                            <table class="eng-table" id="cascadeTable" style="text-align:center;">
+                                <thead>
+                                    <tr>
+                                        <th>K</th>
+                                        <th>Ck (%)</th>
+                                        <th>Fsk</th>
+                                        <th>Fsr</th>
+                                        <th>Fsr − Fsk</th>
+                                        <th>Fc.k</th>
+                                        <th>m</th>
+                                        <th>cum m</th>
+                                        <th style="color:var(--yellow)">Ff.k</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cascadeBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Bar -->
+        <div id="statusbar">
+            <div style="display:flex; gap:16px; align-items:center;">
+                <div class="status-item">
+                    <div class="status-dot"></div> <span class="hide-mobile" data-i18n="status_ready">System
+                        Ready</span>
+                </div>
+                <div class="status-item"><i class="fa-solid fa-industry" style="opacity:.6; font-size:10px;"></i> <span
+                        id="status-src">0 Sources</span></div>
+                <div class="status-item"><i class="fa-solid fa-filter" style="opacity:.6; font-size:10px;"></i> <span
+                        id="status-snk">0 Sinks</span></div>
+            </div>
+            <div style="display:flex; gap:16px; align-items:center;">
+                <span id="status-unit"
+                    style="color:var(--accent); font-weight:800; background:rgba(59,130,246,0.1); padding: 2px 8px; border-radius: 4px;">Kgmol/hr</span>
+                <span class="hide-mobile">H2 Pinch PRO Engine v3.6</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="print-container"></div>
+
+    <script>
+        // --- I18N DICTIONARY ---
+        const translations = {
+            en: {
+                pdf_credits: "Developed by Free Palestene Team © 2026 | Suez University",
+                excel_title: "Quick Import from Excel",
+                excel_title: "Quick Import from Excel",
+                excel_desc: "Copy data from Excel (Ctrl+C) and paste it here (Ctrl+V) — Required order:",
+                excel_format: "Name | Flow | Impurity% | Pressure bar",
+                excel_placeholder: "Paste Excel data here...",
+                btn_cancel: "Cancel",
+                btn_import: "Import Data",
+                meta_title: "Project Details",
+                meta_proj_name: "Project Name",
+                meta_proj_ph: "e.g. H2 Network Optimization 2024",
+                meta_comp_name: "Company / Refinery Name",
+                meta_comp_ph: "e.g. Alexandria Petroleum Co.",
+                meta_eng_name: "Engineer Name",
+                meta_eng_ph: "e.g. Eng. Ahmed",
+                meta_notes: "Notes / Conclusions",
+                meta_notes_ph: "Write any notes or recommendations...",
+                meta_logo: "Company Logo",
+                btn_choose_img: "Choose Image",
+                btn_delete_logo: "Delete Logo",
+                btn_save_data: "Save Details",
+                title_tour: "Restart Tour",
+                theme_dark: "Dark",
+                theme_light: "Light (Industrial)",
+                theme_green: "Clean Energy",
+                theme_corp: "Corporate",
+                title_meta: "Project Details",
+                title_new: "New Project",
+                title_open: "Open Project (JSON)",
+                title_save: "Save Project",
+                btn_save: "Save",
+                title_print: "Print Report",
+                title_pdf: "Export PDF",
+                tab_data: "Basic Input",
+                tab_config: "Cost Config (OPEX/CAPEX)",
+                tab_results: "Results & Feasibility",
+                tab_network: "Optimized Network",
+                tab_curve: "Composite Curve",
+                tab_table: "Cascade Table",
+                panel_src: "Sources",
+                btn_excel: "Excel",
+                btn_add_src: "Add Source",
+                th_name: "Name",
+                th_flow: "Flow",
+                th_imp: "Impurity (%)",
+                th_pres: "Pressure (bar)",
+                panel_snk: "Sinks (Consumers)",
+                btn_add_snk: "Add Sink",
+                th_req: "Required",
+                th_max_imp: "Max Impurity (%)",
+                tt_fresh_imp: "Allowed impurity percentage in the external fresh hydrogen source.",
+                lbl_fresh_imp: "Fresh H2 Impurity (%):",
+                lbl_compare: "Compare: Membrane vs PSA",
+                btn_run: "Run Engineering Analysis",
+                panel_comp: "Pressure Constraints & Compressors",
+                lbl_en_pres: "Enable pressure constraints and calculate compressor power",
+                lbl_comp_eff: "Compressor Efficiency (%)",
+                lbl_comp_temp: "Inlet Temperature (K)",
+                lbl_elec_cost: "Electricity Cost ($/kWh)",
+                panel_pur: "Purification Unit",
+                lbl_en_pur: "Enable purification unit to recover H2 from purge gas",
+                lbl_pur_tech: "Technology",
+                opt_mem: "Membrane",
+                opt_psa: "PSA",
+                opt_custom: "Custom",
+                lbl_pur_feed_pres: "Feed Pressure (bar)",
+                lbl_pur_feed_flow: "Feed Flow",
+                lbl_pur_feed_imp: "Feed Impurity (%)",
+                lbl_pur_prod_imp: "Product Impurity (%)",
+                lbl_pur_prod_pres: "Product Pressure (bar)",
+                lbl_pur_tail_imp: "Tail Gas Impurity (%)",
+                lbl_pur_tail_pres: "Tail Gas Pressure (bar)",
+                panel_capex: "Capital Cost (CAPEX) & Maintenance",
+                desc_capex: "CAPEX is calculated programmatically using the Six-Tenths Rule.",
+                sub_pur: "Purification Unit",
+                lbl_base_cost: "Base Cost ($)",
+                lbl_base_cap: "Base Capacity",
+                lbl_scale: "Scale Factor (n)",
+                lbl_maint: "Annual Maint. (% OPEX)",
+                sub_comp: "Compressors",
+                lbl_base_kw: "Base Power (kW)",
+                panel_opex: "Operating Costs (OPEX)",
+                lbl_fresh_cost: "Fresh H2 Cost ($ / unit)",
+                lbl_fuel_val: "Purge Fuel Value ($ / unit)",
+                lbl_op_hrs: "Operating Hours (hr/yr)",
+                hint_results: "Waiting for engineering engine execution...",
+                sec_comp_eval: "Comparative Analysis & Evaluation (Membrane vs PSA)",
+                sec_targets: "Pinch Targets",
+                rc_fresh: "Minimum Fresh Target",
+                rc_purge: "Final Purge Gas",
+                sec_feasibility: "Feasibility & Cost Summary",
+                rc_capex_pur: "CAPEX: Purification Unit",
+                rcu_capex_pur: "Cost of Separation Unit",
+                rc_capex_comp: "CAPEX: New Compressors",
+                rcu_capex_comp: "Cost of Compressors",
+                rc_capex_total: "Total CAPEX",
+                rcu_capex_total: "Total Capital Investment",
+                rc_opex_base: "Old Network OPEX",
+                rcu_mat_cost: "(Material Cost)",
+                rc_opex_new: "New Network OPEX",
+                tt_opex_new: "Includes: Cost of Fresh H2 - Fuel value of Purge + Compressor power + Annual maintenance for new equipment.",
+                rcu_inc_maint: "(Inc. Maint & Elec)",
+                rc_savings: "Net OPEX Savings",
+                rcu_yearly: "Yearly:",
+                rc_payback: "Payback Period",
+                rcu_years: "Years",
+                hint_network: "Network diagram currently unavailable.",
+                panel_net_diag: "Interactive Network Diagram",
+                btn_zoom_in: "Zoom In",
+                btn_zoom_out: "Zoom Out",
+                btn_fit: "Fit to Screen",
+                btn_save_img: "Save Image",
+                hint_curve: "Composite Curve pending...",
+                panel_curve: "Composite Curve",
+                hint_table: "Cascade Table unavailable.",
+                panel_cascade: "Problem Table Algorithm",
+                status_ready: "System Ready",
+
+                // JS Strings
+                toast_meta_saved: "Project details saved temporarily",
+                toast_img_large: "Image is too large. Max 2MB",
+                toast_img_upload: "Logo uploaded successfully",
+                msg_convert_unit: "Convert existing values to the new unit?\n[OK] Math conversion / [Cancel] Change label only",
+                toast_unit_conv: "Values converted successfully",
+                toast_recalc_warn: "Please run the analysis again to update costs based on the new unit",
+                msg_del_confirm: "Are you sure you want to delete this item?",
+                toast_neg_val: "Value cannot be negative",
+                toast_imp_limit: "Impurity percentage must be between 0 and 100",
+                new_source: "New Source",
+                new_sink: "New Sink",
+                toast_paste_empty: "No data entered!",
+                toast_rows_added: "rows added successfully",
+                toast_paste_err: "Invalid data format",
+                toast_proj_saved: "Project saved successfully!",
+                toast_save_err: "Error saving file.",
+                toast_proj_loaded: "Project loaded successfully!",
+                toast_load_err: "Invalid file format!",
+                toast_load_invalid: "This file does not contain valid project data.",
+                msg_clear_all: "Are you sure you want to clear all data?",
+                toast_cleared: "Data cleared successfully",
+                toast_min_req: "At least one source and one sink are required",
+                toast_analysis_done: "Engineering analysis completed successfully!",
+                toast_comp_done: "Comparative analysis completed successfully!",
+                toast_img_err: "Diagram unavailable. Please run analysis first.",
+                toast_img_saved: "Image saved successfully!",
+                toast_pdf_req: "Please run the analysis before generating the report",
+                toast_pdf_gen: "Generating PDF report...",
+                toast_pdf_done: "Report generated successfully!",
+                toast_pdf_err: "Error generating report",
+
+                // Dynamic Table/Graph/PDF
+                str_sources: "Sources",
+                str_sinks: "Sinks",
+                str_unfeasible: "Unfeasible",
+                str_immediate: "Immediate (0.0)",
+                str_comp_criteria: "Criteria",
+                str_mem: "Membrane",
+                str_psa: "PSA",
+                str_custom: "Custom",
+                str_capex: "Capital Investment (CAPEX)",
+                str_net_sav: "Net Annual Savings",
+                str_payback: "Payback Period",
+                str_rec_pur: "Recovery Purity",
+                str_years: "Years",
+                str_rec_tech: "Engineering Recommendation: ",
+                str_rec_desc: "Based on economic data, this technology is optimal for the network as it provides a faster capital payback period and higher economic return compared to the alternative.",
+                str_rec_note: "(Note: The data listed in the following sections are based on the current user selection:",
+                str_surplus: "Surplus",
+                str_impurity: "Impurity",
+                str_src_node: "Source: ",
+                str_snk_node: "Sink: ",
+                str_fresh_node: "Fresh H2",
+                str_rec_node: "Recycled H2",
+                str_tail_node: "Purifier Bottoms",
+                str_purge_node: "Final Purge Gas",
+
+                // PDF Strings
+                pdf_main_title: "Hydrogen Network & Feasibility Report",
+                pdf_company: "Company/Facility:",
+                pdf_engineer: "Prepared by:",
+                pdf_date: "Date:",
+                pdf_sec_1_ar: "1. Comparative Analysis",
+                pdf_sec_1_en: "(Membrane vs PSA)",
+                pdf_sec_exec_ar: "Executive Summary",
+                pdf_sec_exec_en: "(Technical & Economic)",
+                pdf_card_fresh: "Fresh Target",
+                pdf_card_capex: "Total CAPEX",
+                pdf_card_new_op: "New Operation (Inc. Maint & Elec)",
+                pdf_card_sav: "Continuous Net Savings",
+                pdf_card_pb: "Payback Period",
+                pdf_sec_net_ar: "Interactive Network Diagram",
+                pdf_sec_net_en: "(Optimized Topology)",
+                pdf_sec_curve_ar: "Composite Curve",
+                pdf_sec_curve_en: "(Pinch Targeting)",
+                pdf_sec_table_ar: "Problem Table Algorithm",
+                pdf_sec_table_en: "(Cascade Output)",
+                pdf_sec_notes_ar: "Notes & Conclusions",
+                pdf_sec_notes_en: "(Engineer Remarks)",
+
+                // Tour
+                tour_1: "<strong>Welcome to H2 Pinch Analyzer!</strong><br><br>Here is a quick tour to learn how to use the software.",
+                tour_2: "<strong>Sources:</strong><br>Enter the flow and impurity of available gases.",
+                tour_3: "<strong>Sinks:</strong><br>Enter the units that consume hydrogen and their maximum impurity.",
+                tour_4: "<strong>Navigation:</strong><br>Visit the (Cost Config) tab to adjust CAPEX and OPEX parameters.",
+                tour_5: "<strong>Execution:</strong><br>Now you can enable (Compare) to run an analysis between different technologies with one click!",
+                tour_6: "<strong>Export:</strong><br>Save your project or export the final report as PDF.",
+                tour_next: "Next &rarr;",
+                tour_prev: "&larr; Prev",
+                tour_done: "Done"
+            },
+            ar: {
+                pdf_credits: "تم التطوير بواسطة فريق Free Palestene © 2026 | جامعة السويس",
+                excel_title: "استيراد سريع من Excel",
+                excel_title: "استيراد سريع من Excel",
+                excel_desc: "قم بنسخ البيانات من الإكسيل (Ctrl+C) ثم الصقها هنا (Ctrl+V) — الترتيب المطلوب:",
+                excel_format: "الاسم | التدفق | الشوائب% | الضغط bar",
+                excel_placeholder: "الصق البيانات هنا...",
+                btn_cancel: "إلغاء",
+                btn_import: "استيراد البيانات",
+                meta_title: "بيانات المشروع",
+                meta_proj_name: "اسم المشروع",
+                meta_proj_ph: "مثال: H2 Network Optimization 2024",
+                meta_comp_name: "اسم الشركة / المصفاة",
+                meta_comp_ph: "مثال: شركة الإسكندرية للبترول",
+                meta_eng_name: "اسم المهندس المُعد",
+                meta_eng_ph: "مثال: م. أحمد محمد",
+                meta_notes: "ملاحظات المهندس / استنتاجات",
+                meta_notes_ph: "اكتب أي ملاحظات أو توصيات...",
+                meta_logo: "شعار الشركة (Logo)",
+                btn_choose_img: "اختيار صورة",
+                btn_delete_logo: "حذف الشعار",
+                btn_save_data: "حفظ البيانات",
+                title_tour: "إعادة الجولة الإرشادية",
+                theme_dark: "الداكن (Dark)",
+                theme_light: "الصناعي (Light)",
+                theme_green: "الطاقة النظيفة (Green)",
+                theme_corp: "شركات البترول (Corporate)",
+                title_meta: "إعدادات بيانات المشروع",
+                title_new: "مشروع جديد",
+                title_open: "فتح ملف مشروع (JSON)",
+                title_save: "حفظ المشروع",
+                btn_save: "حفظ",
+                title_print: "طباعة التقرير",
+                title_pdf: "تصدير كملف PDF",
+                tab_data: "الإدخال الأساسي",
+                tab_config: "إعدادات التكلفة (OPEX/CAPEX)",
+                tab_results: "النتائج والجدوى",
+                tab_network: "الشبكة المُحسنة",
+                tab_curve: "المنحنى المركب",
+                tab_table: "جدول التتابع",
+                panel_src: "المصادر (Sources)",
+                btn_excel: "إكسيل",
+                btn_add_src: "إضافة مصدر",
+                th_name: "الاسم",
+                th_flow: "التدفق",
+                th_imp: "الشوائب (%)",
+                th_pres: "الضغط (bar)",
+                panel_snk: "المستهلكات (Sinks)",
+                btn_add_snk: "إضافة مستهلك",
+                th_req: "الاحتياج",
+                th_max_imp: "الحد الأقصى (%)",
+                tt_fresh_imp: "نسبة الشوائب المسموح بها في مصدر الهيدروجين النقي الخارجي.",
+                lbl_fresh_imp: "نسبة شوائب الهيدروجين النقي (%):",
+                lbl_compare: "مقارنة: Membrane vs PSA",
+                btn_run: "بدء التحليل الهندسي",
+                panel_comp: "قيود الضغط والكباسات",
+                lbl_en_pres: "تفعيل قيود الضغط وحساب استهلاك الطاقة للكباسات",
+                lbl_comp_eff: "كفاءة الكباس (%)",
+                lbl_comp_temp: "حرارة الدخول (K)",
+                lbl_elec_cost: "تكلفة الكهرباء ($/kWh)",
+                panel_pur: "وحدة التنقية (Purification Unit)",
+                lbl_en_pur: "تفعيل وحدة تنقية لاسترجاع الهيدروجين من الغاز المطرود",
+                lbl_pur_tech: "تقنية التنقية",
+                opt_mem: "أغشية (Membrane)",
+                opt_psa: "امتزاز (PSA)",
+                opt_custom: "مخصص (Custom)",
+                lbl_pur_feed_pres: "ضغط التغذية (bar)",
+                lbl_pur_feed_flow: "كمية التغذية",
+                lbl_pur_feed_imp: "شوائب التغذية (%)",
+                lbl_pur_prod_imp: "شوائب المنتج النقي (%)",
+                lbl_pur_prod_pres: "ضغط المنتج النقي (bar)",
+                lbl_pur_tail_imp: "شوائب الغاز العادم (%)",
+                lbl_pur_tail_pres: "ضغط الغاز العادم (bar)",
+                panel_capex: "إعدادات التكلفة الرأسمالية (CAPEX) والصيانة",
+                desc_capex: "يتم حساب الـ CAPEX برمجياً باستخدام معادلة Six-Tenths Rule.",
+                sub_pur: "وحدة التنقية (Purification Unit)",
+                lbl_base_cost: "التكلفة المرجعية ($ Base)",
+                lbl_base_cap: "السعة المرجعية",
+                lbl_scale: "معامل التحجيم (Scale n)",
+                lbl_maint: "الصيانة السنوية (% OPEX)",
+                sub_comp: "الكباسات (Compressors)",
+                lbl_base_kw: "الطاقة المرجعية (Base kW)",
+                panel_opex: "التكاليف التشغيلية (OPEX Parameters)",
+                lbl_fresh_cost: "تكلفة الفريش هيدروجين ($ / وحدة)",
+                lbl_fuel_val: "قيمة المطرود كوقود ($ / وحدة)",
+                lbl_op_hrs: "ساعات التشغيل السنوية (hr/yr)",
+                hint_results: "في انتظار تشغيل محرك الحسابات الهندسية...",
+                sec_comp_eval: "التحليل المقارن والتقييم الهندسي (Membrane vs PSA)",
+                sec_targets: "الأهداف الرئيسية الفنية (Pinch Targets)",
+                rc_fresh: "الحد الأدنى للهيدروجين النقي",
+                rc_purge: "الغاز المطرود النهائي",
+                sec_feasibility: "دراسة الجدوى الاقتصادية",
+                rc_capex_pur: "CAPEX: وحدة التنقية",
+                rcu_capex_pur: "Cost of Separation Unit",
+                rc_capex_comp: "CAPEX: الكباسات الجديدة",
+                rcu_capex_comp: "Cost of Compressors",
+                rc_capex_total: "إجمالي الاستثمار (Total CAPEX)",
+                rcu_capex_total: "إجمالي التكلفة الرأسمالية المطلوبة",
+                rc_opex_base: "OPEX الشبكة القديمة",
+                rcu_mat_cost: "(تكلفة المادة)",
+                rc_opex_new: "OPEX الشبكة الجديدة",
+                tt_opex_new: "تشمل: تكلفة الهيدروجين المضاف - عائد الغاز المطرود + كهرباء الكباسات + الصيانة السنوية للمعدات الجديدة وتغيير الأغشية.",
+                rcu_inc_maint: "(شامل الصيانة والكهرباء)",
+                rc_savings: "التوفير الصافي (Net Savings)",
+                rcu_yearly: "سنوياً:",
+                rc_payback: "فترة الاسترداد (Payback)",
+                rcu_years: "سنوات (Years)",
+                hint_network: "المخطط الشبكي غير متاح حالياً",
+                panel_net_diag: "مخطط الشبكة التفاعلي",
+                btn_zoom_in: "تكبير العرض",
+                btn_zoom_out: "تصغير العرض",
+                btn_fit: "احتواء كامل بالشاشة",
+                btn_save_img: "حفظ كصورة",
+                hint_curve: "المنحنى المركب قيد الانتظار...",
+                panel_curve: "منحنى البنش المركب (Composite Curve)",
+                hint_table: "جدول التتابع غير متاح",
+                panel_cascade: "جدول التتابع الجبري",
+                status_ready: "النظام جاهز",
+
+                // JS Strings
+                toast_meta_saved: "تم حفظ بيانات المشروع مؤقتاً",
+                toast_img_large: "حجم الصورة كبير جداً. الحد الأقصى 2 ميجابايت",
+                toast_img_upload: "تم رفع الشعار بنجاح",
+                msg_convert_unit: "تحويل الأرقام الموجودة إلى الوحدة الجديدة؟\n[OK] تحويل حسابي / [Cancel] تغيير الاسم فقط",
+                toast_unit_conv: "تم تحويل الأرقام بنجاح",
+                toast_recalc_warn: "برجاء إعادة الحساب لتحديث التكاليف بناءً على الوحدة الجديدة",
+                msg_del_confirm: "هل أنت متأكد من حذف هذا العنصر؟",
+                toast_neg_val: "لا يمكن أن تكون القيمة سالبة",
+                toast_imp_limit: "نسبة الشوائب يجب أن تكون بين 0 و 100",
+                new_source: "مصدر جديد",
+                new_sink: "مستهلك جديد",
+                toast_paste_empty: "لم تقم بإدخال أي بيانات!",
+                toast_rows_added: "صفوف أضيفت بنجاح",
+                toast_paste_err: "صيغة البيانات غير صحيحة",
+                toast_proj_saved: "تم حفظ المشروع بنجاح!",
+                toast_save_err: "حدث خطأ أثناء حفظ الملف.",
+                toast_proj_loaded: "تم استرجاع بيانات المشروع بنجاح!",
+                toast_load_err: "صيغة الملف غير صالحة!",
+                toast_load_invalid: "هذا الملف لا يحتوي على بيانات مشروع صالحة.",
+                msg_clear_all: "هل أنت متأكد من مسح جميع البيانات؟",
+                toast_cleared: "تم مسح البيانات بنجاح",
+                toast_min_req: "يجب إدخال مصدر واحد ومستهلك واحد على الأقل",
+                toast_analysis_done: "اكتمل التحليل الهندسي بنجاح!",
+                toast_comp_done: "تم إجراء التحليل المقارن بنجاح!",
+                toast_img_err: "الرسم غير متاح حالياً. يرجى تشغيل التحليل أولاً.",
+                toast_img_saved: "تم حفظ الصورة بنجاح!",
+                toast_pdf_req: "برجاء إجراء التحليل أولاً قبل محاولة إنشاء التقرير",
+                toast_pdf_gen: "جاري إنشاء تقرير الـ PDF...",
+                toast_pdf_done: "تم تحميل التقرير بنجاح!",
+                toast_pdf_err: "حدث خطأ أثناء إنشاء التقرير",
+
+                str_sources: "مصادر",
+                str_sinks: "مستهلك",
+                str_unfeasible: "غير مجدي",
+                str_immediate: "فوري (0.0)",
+                str_comp_criteria: "وجه المقارنة",
+                str_mem: "Membrane (الأغشية)",
+                str_psa: "PSA (الامتزاز)",
+                str_custom: "مخصص (Custom)",
+                str_capex: "الاستثمار المطلوب (CAPEX)",
+                str_net_sav: "التوفير السنوي الصافي (Savings)",
+                str_payback: "فترة الاسترداد (Payback)",
+                str_rec_pur: "نقاء الاسترجاع (Recovery Purity)",
+                str_years: "سنوات",
+                str_rec_tech: "التوصية الهندسية: تقنية الـ ",
+                str_rec_desc: "بناءً على المعطيات الاقتصادية، تعتبر هذه التقنية هي الأفضل للشبكة حيث توفر فترة استرداد أسرع وعائداً اقتصادياً أعلى مقارنة بالبديل الآخر.",
+                str_rec_note: "(ملاحظة: البيانات المسرودة في الأقسام التالية مبنية على اختيار المستخدم الحالي:",
+                str_surplus: "الفائض",
+                str_impurity: "الشوائب",
+                str_src_node: "المصدر: ",
+                str_snk_node: "المستهلك: ",
+                str_fresh_node: "Fresh H2",
+                str_rec_node: "Recycled H2",
+                str_tail_node: "Purifier Bottoms",
+                str_purge_node: "Final Purge Gas",
+
+                pdf_main_title: "تقرير تحليل شبكة الهيدروجين والجدوى الاقتصادية",
+                pdf_company: "الشركة / المنشأة:",
+                pdf_engineer: "إعداد المهندس:",
+                pdf_date: "تاريخ التقرير:",
+                pdf_sec_1_ar: "1. التقييم المقارن",
+                pdf_sec_1_en: "(Membrane vs PSA)",
+                pdf_sec_exec_ar: "ملخص الجدوى الفنية والاقتصادية",
+                pdf_sec_exec_en: "(Executive Summary)",
+                pdf_card_fresh: "الهيدروجين النقي (Fresh Target)",
+                pdf_card_capex: "إجمالي الاستثمار المطلوب (CAPEX)",
+                pdf_card_new_op: "التشغيل الجديد (شامل الصيانة والكهرباء)",
+                pdf_card_sav: "التوفير الصافي المستمر",
+                pdf_card_pb: "فترة استرداد رأس المال (Payback)",
+                pdf_sec_net_ar: "مخطط الشبكة التفاعلي",
+                pdf_sec_net_en: "(Network Diagram)",
+                pdf_sec_curve_ar: "منحنى البنش المركب",
+                pdf_sec_curve_en: "(Composite Curve)",
+                pdf_sec_table_ar: "جدول التتابع الجبري",
+                pdf_sec_table_en: "(Problem Table Algorithm)",
+                pdf_sec_notes_ar: "الملاحظات والاستنتاجات",
+                pdf_sec_notes_en: "(Notes & Conclusions)",
+
+                tour_1: "<strong>مرحباً بك في H2 Pinch Analyzer!</strong><br><br>هذه جولة سريعة لتتعرف على كيفية استخدام البرنامج.",
+                tour_2: "<strong>المصادر (Sources):</strong><br>أدخل التدفق ونسبة الشوائب للغازات المتاحة.",
+                tour_3: "<strong>المستهلكات (Sinks):</strong><br>أدخل الوحدات التي تستهلك الهيدروجين والحد الأقصى للشوائب.",
+                tour_4: "<strong>التنقل:</strong><br>قم بزيارة صفحة (الإعدادات الاقتصادية) لضبط الـ CAPEX والـ OPEX.",
+                tour_5: "<strong>التشغيل:</strong><br>الآن يمكنك تفعيل (المقارنة) لعمل تحليل بين التقنيات المختلفة بضغطة زر!",
+                tour_6: "<strong>التصدير:</strong><br>احفظ المشروع أو قم بتصدير التقرير النهائي كـ PDF.",
+                tour_next: "التالي &larr;",
+                tour_prev: "&rarr; السابق",
+                tour_done: "إنهاء الجولة"
+            }
+        };
+
+        let currentLang = localStorage.getItem('h2_pinch_lang') || 'en';
+
+        function t(key) { return translations[currentLang][key] || key; }
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('h2_pinch_lang', lang);
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            document.getElementById('langSelector').value = lang;
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) el.innerHTML = translations[lang][key];
+            });
+
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (translations[lang][key]) el.placeholder = translations[lang][key];
+            });
+
+            document.querySelectorAll('[data-i18n-title]').forEach(el => {
+                const key = el.getAttribute('data-i18n-title');
+                if (translations[lang][key]) el.title = translations[lang][key];
+            });
+
+            renderTables();
+            updateStatusBar();
+
+            // Re-render charts and networks if results are visible to update labels
+            if (document.getElementById('badge-results') && !document.getElementById('badge-results').classList.contains('hidden-badge')) {
+                if (lastNetworkData) drawInteractiveNetwork(lastNetworkData, document.getElementById('enable_pressure').checked);
+                if (hgccChartInstance && window.lastChartParams) {
+                    drawCompositeCurveChart(window.lastChartParams.res, window.lastChartParams.freshTarget, window.lastChartParams.freshImp);
+                }
+                if (comparisonData) updateComparisonUI(comparisonData.memResults, comparisonData.psaResults, comparisonData.winner);
+            }
+        }
+
+        // --- END I18N DICTIONARY ---
+
+        let projectMeta = { projectName: '', companyName: '', engineerName: '', notes: '', logoBase64: '' };
+        let comparisonData = null; // Store comparison results globally for PDF
+
+        function openMetaModal() { document.getElementById('meta_projectName').value = projectMeta.projectName || ''; document.getElementById('meta_companyName').value = projectMeta.companyName || ''; document.getElementById('meta_engineerName').value = projectMeta.engineerName || ''; document.getElementById('meta_notes').value = projectMeta.notes || ''; updateLogoPreview(); document.getElementById('metaModal').classList.add('open'); }
+        function saveMetaModal() { projectMeta.projectName = document.getElementById('meta_projectName').value.trim(); projectMeta.companyName = document.getElementById('meta_companyName').value.trim(); projectMeta.engineerName = document.getElementById('meta_engineerName').value.trim(); projectMeta.notes = document.getElementById('meta_notes').value.trim(); closeModal('metaModal'); showToast(t('toast_meta_saved'), 'success'); }
+        function handleLogoUpload(event) { const file = event.target.files[0]; if (!file) return; if (file.size > 2 * 1024 * 1024) { showToast(t('toast_img_large'), 'error'); event.target.value = ''; return; } const reader = new FileReader(); reader.onload = function (e) { projectMeta.logoBase64 = e.target.result; updateLogoPreview(); showToast(t('toast_img_upload'), 'success'); }; reader.readAsDataURL(file); }
+        function removeLogo() { projectMeta.logoBase64 = ''; document.getElementById('meta_logo_input').value = ''; updateLogoPreview(); }
+        function updateLogoPreview() { const container = document.getElementById('logo_preview_container'), img = document.getElementById('logo_preview_img'), btnRemove = document.getElementById('btn_remove_logo'); if (projectMeta.logoBase64 && projectMeta.logoBase64 !== '') { img.src = projectMeta.logoBase64; container.style.display = 'flex'; btnRemove.style.display = 'inline-flex'; } else { img.src = ''; container.style.display = 'none'; btnRemove.style.display = 'none'; } }
+        function closeModal(modalId) { document.getElementById(modalId).classList.remove('open'); }
+
+        function startTour() {
+            switchTab('tab-data');
+            introJs().setOptions({ nextLabel: t('tour_next'), prevLabel: t('tour_prev'), doneLabel: t('tour_done'), showStepNumbers: false, exitOnOverlayClick: false, steps: [{ element: document.getElementById('tour-step-1'), intro: t('tour_1') }, { element: document.getElementById('tour-step-2'), intro: t('tour_2') }, { element: document.getElementById('tour-step-3'), intro: t('tour_3') }, { element: document.getElementById('tabbar'), intro: t('tour_4') }, { element: document.getElementById('tour-step-4'), intro: t('tour_5') }, { element: document.getElementById('tour-step-6'), intro: t('tour_6') }] }).start();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setLanguage(currentLang);
+            loadTheme();
+            if (!localStorage.getItem('h2_tour_done_v2')) { setTimeout(() => { startTour(); localStorage.setItem('h2_tour_done_v2', 'true'); }, 800); }
+        });
+
+        function changeTheme(themeName) { document.documentElement.setAttribute('data-theme', themeName); localStorage.setItem('h2_pinch_theme', themeName); if (hgccChartInstance) { const rootStyles = getComputedStyle(document.documentElement); const textColor = rootStyles.getPropertyValue('--text-2').trim(); const gridColor = (themeName === 'light' || themeName === 'green') ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.05)'; hgccChartInstance.options.scales.x.ticks.color = textColor; hgccChartInstance.options.scales.x.title.color = textColor; hgccChartInstance.options.scales.x.grid.color = gridColor; hgccChartInstance.options.scales.y.ticks.color = textColor; hgccChartInstance.options.scales.y.title.color = textColor; hgccChartInstance.options.scales.y.grid.color = gridColor; hgccChartInstance.update(); } if (visNetworkInstance && typeof lastNetworkData !== 'undefined' && lastNetworkData) { const isPressureEnabled = document.getElementById('enable_pressure').checked; drawInteractiveNetwork(lastNetworkData, isPressureEnabled); } }
+        function loadTheme() { const savedTheme = localStorage.getItem('h2_pinch_theme') || 'dark'; document.getElementById('themeSelector').value = savedTheme; document.documentElement.setAttribute('data-theme', savedTheme); }
+
+        function switchTab(id) { document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active')); document.querySelectorAll('.tab').forEach(t => t.classList.remove('active')); document.getElementById(id).classList.add('active'); const map = { 'tab-data': 't-data', 'tab-config': 't-config', 'tab-results': 't-results', 'tab-network': 't-network', 'tab-curve': 't-curve', 'tab-table': 't-table' }; const tabElement = document.getElementById(map[id]); tabElement.classList.add('active'); tabElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }); if (id === 'tab-curve' && hgccChartInstance) { setTimeout(() => hgccChartInstance.resize(), 50); } if (id === 'tab-network' && visNetworkInstance) { setTimeout(() => visNetworkInstance.fit(), 50); } }
+
+        function showToast(msg, type = 'info') { const c = document.getElementById('toast-container'); const tEl = document.createElement('div'); const icons = { success: 'fa-circle-check', error: 'fa-circle-xmark', warning: 'fa-triangle-exclamation', info: 'fa-circle-info' }; const rootStyles = getComputedStyle(document.documentElement); const colors = { success: rootStyles.getPropertyValue('--green').trim(), error: rootStyles.getPropertyValue('--red').trim(), warning: rootStyles.getPropertyValue('--yellow').trim(), info: rootStyles.getPropertyValue('--accent').trim() }; tEl.className = `toast ${type}`; tEl.innerHTML = `<i class="fa-solid ${icons[type] || icons.info}" style="color:${colors[type] || colors.info}; font-size:16px;"></i> <span>${msg}</span>`; c.appendChild(tEl); setTimeout(() => { tEl.classList.add('leaving'); setTimeout(() => tEl.remove(), 300); }, 3500); }
+        function validateLimits(el, min, max) { let v = parseFloat(el.value); if (isNaN(v)) v = min ?? 0; let hasError = false; let errorMsg = ''; if (min !== null && v < min) { v = min; hasError = true; errorMsg = t('toast_neg_val'); } if (max !== null && v > max) { v = max; hasError = true; errorMsg = t('toast_imp_limit'); } if (hasError) { showToast(errorMsg, 'warning'); el.style.borderColor = 'var(--red)'; el.style.boxShadow = '0 0 0 2px rgba(239,68,68,0.2)'; el.style.color = 'var(--red)'; setTimeout(() => { el.style.borderColor = ''; el.style.boxShadow = ''; el.style.color = ''; }, 2500); } el.value = v; }
+        function exportCanvasAsPNG(canvasSelector, fileName) { const canvas = document.querySelector(canvasSelector); if (!canvas) { showToast(t('toast_img_err'), 'warning'); return; } const tempCanvas = document.createElement('canvas'); tempCanvas.width = canvas.width; tempCanvas.height = canvas.height; const ctx = tempCanvas.getContext('2d'); const rootStyles = getComputedStyle(document.documentElement); ctx.fillStyle = rootStyles.getPropertyValue('--bg-app').trim(); ctx.fillRect(0, 0, tempCanvas.width, tempCanvas.height); ctx.drawImage(canvas, 0, 0); const link = document.createElement('a'); link.download = fileName; link.href = tempCanvas.toDataURL('image/png', 1.0); link.click(); showToast(t('toast_img_saved'), 'success'); }
+
+        let currentUnit = 'Kgmol/hr'; const unitFactors = { 'Kgmol/hr': 1, 'MMSCFD': 49.8, 'Nm3/hr': 0.0446, 'kg/hr': 0.496 };
+        function handleUnitChange(newUnit) {
+            if (newUnit === currentUnit) return;
+            if (confirm(t('msg_convert_unit'))) {
+                let f = unitFactors[currentUnit] / unitFactors[newUnit]; // flow_new = flow_old * f
+                // Flow-like quantities (capacity inputs) scale by f, same direction as the data they describe
+                sources.forEach(s => s.flow = parseFloat((s.flow * f).toFixed(4)));
+                sinks.forEach(s => s.req = parseFloat((s.req * f).toFixed(4)));
+                let pCap = document.getElementById('capex_pur_base_cap');
+                pCap.value = parseFloat((parseFloat(pCap.value) * f).toFixed(4));
+                // Price-like quantities ($ per flow-unit) must scale by 1/f so that
+                // price * flow (the actual $ amount) stays invariant under the unit change.
+                // e.g. if flow_new = flow_old * f, then cost_per_unit_new = cost_per_unit_old / f
+                let freshCostEl = document.getElementById('fresh_h2_cost');
+                freshCostEl.value = parseFloat((parseFloat(freshCostEl.value) / f).toFixed(6));
+                let fuelValueEl = document.getElementById('fuel_value');
+                fuelValueEl.value = parseFloat((parseFloat(fuelValueEl.value) / f).toFixed(6));
+                showToast(t('toast_unit_conv'), 'success');
+            }
+            currentUnit = newUnit; updateUnitLabels(); renderTables();
+            if (!document.getElementById('badge-results').classList.contains('hidden-badge')) showToast(t('toast_recalc_warn'), 'warning');
+        }
+        function updateUnitLabels() { document.querySelectorAll('.flow-unit-label').forEach(el => el.textContent = `(${currentUnit})`); document.getElementById('unitSelector').value = currentUnit; document.getElementById('status-unit').textContent = currentUnit; }
+
+        let sources = [{ id: 'src_1', name: 'Source 1', flow: 623.8, impurity: 7.0, pressure: 100 }, { id: 'src_2', name: 'Source 2', flow: 415.8, impurity: 20.0, pressure: 100 }, { id: 'src_3', name: 'Source 3', flow: 1940.5, impurity: 25.0, pressure: 100 }, { id: 'src_4', name: 'Source 4', flow: 346.5, impurity: 27.0, pressure: 100 }, { id: 'src_5', name: 'Source 5', flow: 457.4, impurity: 30.0, pressure: 100 }];
+        let sinks = [{ id: 'snk_1', name: 'Sink 1', req: 2495.0, maxImp: 19.39, pressure: 100 }, { id: 'snk_2', name: 'Sink 2', req: 180.2, maxImp: 21.15, pressure: 100 }, { id: 'snk_3', name: 'Sink 3', req: 554.4, maxImp: 22.43, pressure: 100 }, { id: 'snk_4', name: 'Sink 4', req: 720.7, maxImp: 24.86, pressure: 100 }];
+
+        function updateStatusBar() { document.getElementById('status-src').textContent = `${sources.length} ${t('str_sources')}`; document.getElementById('status-snk').textContent = `${sinks.length} ${t('str_sinks')}`; }
+        function renderTables() { const isPressureEnabled = document.getElementById('enable_pressure').checked; const pc = isPressureEnabled ? '' : 'display:none;'; const srcBody = document.getElementById('sourcesBody'); srcBody.innerHTML = ''; sources.forEach((s, i) => { srcBody.innerHTML += `<tr><td><input type="text" value="${s.name}" onchange="updateData('src',${i},'name',this.value)" class="eng-input" style="background:transparent; border-color:transparent; min-width:80px;"></td><td><input type="number" min="0" value="${s.flow}" onchange="updateData('src',${i},'flow',this.value)" class="eng-input" style="width:100%; min-width:70px; direction:ltr; color:var(--accent-hi); font-weight:700;"></td><td><input type="number" min="0" max="100" value="${s.impurity}" step="0.01" onchange="updateData('src',${i},'impurity',this.value)" class="eng-input" style="width:100%; min-width:70px; direction:ltr;"></td><td class="pressure-col" style="${pc}"><input type="number" min="0" value="${s.pressure}" step="0.1" onchange="updateData('src',${i},'pressure',this.value)" class="eng-input" style="width:100%; min-width:70px; direction:ltr; color:var(--accent);"></td><td class="no-print"><button class="btn-sm del" onclick="removeData('src',${i})" title="Delete"><i class="fa-solid fa-trash"></i></button></td></tr>`; }); const snkBody = document.getElementById('sinksBody'); snkBody.innerHTML = ''; sinks.forEach((s, i) => { snkBody.innerHTML += `<tr><td><input type="text" value="${s.name}" onchange="updateData('snk',${i},'name',this.value)" class="eng-input" style="background:transparent; border-color:transparent; min-width:80px;"></td><td><input type="number" min="0" value="${s.req}" onchange="updateData('snk',${i},'req',this.value)" class="eng-input" style="width:100%; min-width:70px; direction:ltr; color:var(--orange); font-weight:700;"></td><td><input type="number" min="0" max="100" value="${s.maxImp}" step="0.01" onchange="updateData('snk',${i},'maxImp',this.value)" class="eng-input" style="width:100%; min-width:70px; direction:ltr;"></td><td class="pressure-col" style="${pc}"><input type="number" min="0" value="${s.pressure}" step="0.1" onchange="updateData('snk',${i},'pressure',this.value)" class="eng-input" style="width:100%; min-width:70px; direction:ltr; color:var(--accent);"></td><td class="no-print"><button class="btn-sm del" onclick="removeData('snk',${i})" title="Delete"><i class="fa-solid fa-trash"></i></button></td></tr>`; }); document.querySelectorAll('.pressure-col').forEach(el => el.style.display = isPressureEnabled ? '' : 'none'); updateStatusBar(); }
+        function updateData(type, index, field, value) { if (field === 'name') { if (type === 'src') sources[index][field] = value; else sinks[index][field] = value; return; } let v = parseFloat(value); if (isNaN(v)) v = 0; if ((field === 'flow' || field === 'req' || field === 'pressure') && v < 0) { v = 0; showToast(t('toast_neg_val'), 'warning'); } if ((field === 'impurity' || field === 'maxImp') && (v < 0 || v > 100)) { v = Math.max(0, Math.min(100, v)); showToast(t('toast_imp_limit'), 'warning'); } if (type === 'src') sources[index][field] = v; else sinks[index][field] = v; renderTables(); }
+        function removeData(type, index) { if (confirm(t('msg_del_confirm'))) { if (type === 'src') sources.splice(index, 1); else sinks.splice(index, 1); renderTables(); } }
+        function addSource() { sources.push({ id: 'src_' + Date.now(), name: t('new_source'), flow: 100, impurity: 5.0, pressure: 100 }); renderTables(); }
+        function addSink() { sinks.push({ id: 'snk_' + Date.now(), name: t('new_sink'), req: 100, maxImp: 10.0, pressure: 100 }); renderTables(); }
+
+        function togglePressure() { const on = document.getElementById('enable_pressure').checked; document.getElementById('comp_settings_panel').style.display = on ? '' : 'none'; renderTables(); }
+        function togglePurifier() { document.getElementById('purifier_settings').style.display = document.getElementById('enable_purifier').checked ? '' : 'none'; }
+        function changePurifierType() {
+            const t = document.getElementById('purifier_type').value;
+            const p = document.getElementById('pur_prod_imp'), tl = document.getElementById('pur_tail_imp');
+            const pp = document.getElementById('pur_prod_pres'), pt = document.getElementById('pur_tail_pres');
+            const baseCost = document.getElementById('capex_pur_base_cost'), scaleFactor = document.getElementById('capex_pur_scale');
+            const opexPercent = document.getElementById('opex_pur_percent');
+            let feedPres = parseFloat(document.getElementById('pur_feed_pres').value) || 100;
+
+            if (t === 'membrane') {
+                p.value = 2.0; tl.value = 89.11;
+                p.setAttribute('readonly', true); tl.setAttribute('readonly', true);
+                p.readOnly = true; tl.readOnly = true;
+                pp.value = (feedPres * 0.30).toFixed(1); pt.value = Math.max(1, feedPres - 5).toFixed(1);
+                baseCost.value = 2500000; scaleFactor.value = 0.85; opexPercent.value = 8.0;
+            }
+            else if (t === 'psa') {
+                p.value = 0.1; tl.value = 81.05;
+                p.setAttribute('readonly', true); tl.setAttribute('readonly', true);
+                p.readOnly = true; tl.readOnly = true;
+                pp.value = Math.max(1, feedPres - 2).toFixed(1); pt.value = 2.0;
+                baseCost.value = 5000000; scaleFactor.value = 0.65; opexPercent.value = 5.0;
+            }
+            else if (t === 'custom') {
+                p.readOnly = false; tl.readOnly = false;
+                p.removeAttribute('readonly'); tl.removeAttribute('readonly');
+            }
+        }
+
+        let currentPasteType = 'src';
+        function openExcelModal(type) { currentPasteType = type; document.getElementById('excelPasteArea').value = ''; document.getElementById('excelModal').classList.add('open'); document.getElementById('btnConfirmPaste').onclick = () => processExcelPaste(type); setTimeout(() => document.getElementById('excelPasteArea').focus(), 100); }
+        function processExcelPaste(type) { const text = document.getElementById('excelPasteArea').value; if (!text.trim()) { showToast(t('toast_paste_empty'), 'warning'); return; } let valid = 0; text.split(/\r?\n/).forEach(row => { if (!row.trim()) return; const cols = row.split('\t'); if (cols.length >= 2) { let fl = parseFloat(cols[1].replace(/,/g, '')), imp = cols[2] ? parseFloat(cols[2].replace(/,/g, '')) : 0, pr = cols[3] ? parseFloat(cols[3].replace(/,/g, '')) : 100; const ni = { id: type + '_' + Date.now() + Math.random(), name: cols[0] ? cols[0].trim() : 'Item ' + (valid + 1), flow: isNaN(fl) ? 0 : fl, impurity: isNaN(imp) ? 0 : imp, pressure: isNaN(pr) ? 100 : pr }; if (type === 'src') sources.push(ni); else { ni.req = ni.flow; ni.maxImp = ni.impurity; delete ni.flow; delete ni.impurity; sinks.push(ni); } valid++; } }); closeModal('excelModal'); renderTables(); valid > 0 ? showToast(`${valid} ${t('toast_rows_added')}`, 'success') : showToast(t('toast_paste_err'), 'error'); }
+
+        function saveProject() { try { const d = { version: '3.6.0', meta: projectMeta, sources, sinks, settings: { unit: currentUnit, enablePressure: document.getElementById('enable_pressure').checked, compEff: parseFloat(document.getElementById('comp_eff').value), compTemp: parseFloat(document.getElementById('comp_temp').value), elecCost: parseFloat(document.getElementById('elec_cost').value), enablePurifier: document.getElementById('enable_purifier').checked, purifierType: document.getElementById('purifier_type').value, purFeedPres: parseFloat(document.getElementById('pur_feed_pres').value), purProdImp: parseFloat(document.getElementById('pur_prod_imp').value), purProdPres: parseFloat(document.getElementById('pur_prod_pres').value), purTailImp: parseFloat(document.getElementById('pur_tail_imp').value), purTailPres: parseFloat(document.getElementById('pur_tail_pres').value), capexPurBaseCost: parseFloat(document.getElementById('capex_pur_base_cost').value), capexPurBaseCap: parseFloat(document.getElementById('capex_pur_base_cap').value), capexPurScale: parseFloat(document.getElementById('capex_pur_scale').value), opexPurPercent: parseFloat(document.getElementById('opex_pur_percent').value), capexCompBaseCost: parseFloat(document.getElementById('capex_comp_base_cost').value), capexCompBaseCap: parseFloat(document.getElementById('capex_comp_base_cap').value), capexCompScale: parseFloat(document.getElementById('capex_comp_scale').value), opexCompPercent: parseFloat(document.getElementById('opex_comp_percent').value), freshCost: parseFloat(document.getElementById('fresh_h2_cost').value), fuelValue: parseFloat(document.getElementById('fuel_value').value), freshImpurity: parseFloat(document.getElementById('fresh_impurity').value), opHours: parseFloat(document.getElementById('op_hours').value) } }; const blob = new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = (projectMeta.projectName || 'H2_Pinch_Project') + '.json'; document.body.appendChild(a); a.click(); document.body.removeChild(a); showToast(t('toast_proj_saved'), 'success'); } catch (e) { showToast(t('toast_save_err'), 'error'); } }
+        function triggerLoadProject() { document.getElementById('fileInput').click(); }
+        function loadProject(event) { const file = event.target.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = function (e) { try { const data = JSON.parse(e.target.result); if (data.sources && data.sinks) { projectMeta = data.meta ? Object.assign({ projectName: '', companyName: '', engineerName: '', notes: '', logoBase64: '' }, data.meta) : { projectName: '', companyName: '', engineerName: '', notes: '', logoBase64: '' }; sources = data.sources; sinks = data.sinks; if (data.settings) { if (data.settings.unit) { currentUnit = data.settings.unit; updateUnitLabels(); } document.getElementById('enable_pressure').checked = data.settings.enablePressure || false; if (data.settings.compEff) document.getElementById('comp_eff').value = data.settings.compEff; if (data.settings.compTemp) document.getElementById('comp_temp').value = data.settings.compTemp; if (data.settings.elecCost !== undefined) document.getElementById('elec_cost').value = data.settings.elecCost; document.getElementById('enable_purifier').checked = data.settings.enablePurifier || false; document.getElementById('purifier_type').value = data.settings.purifierType || 'membrane'; if (data.settings.purFeedPres) document.getElementById('pur_feed_pres').value = data.settings.purFeedPres; document.getElementById('pur_prod_imp').value = data.settings.purProdImp || 2.0; if (data.settings.purProdPres) document.getElementById('pur_prod_pres').value = data.settings.purProdPres; document.getElementById('pur_tail_imp').value = data.settings.purTailImp || 89.11; if (data.settings.purTailPres) document.getElementById('pur_tail_pres').value = data.settings.purTailPres; if (data.settings.capexPurBaseCost) document.getElementById('capex_pur_base_cost').value = data.settings.capexPurBaseCost; if (data.settings.capexPurBaseCap) document.getElementById('capex_pur_base_cap').value = data.settings.capexPurBaseCap; if (data.settings.capexPurScale) document.getElementById('capex_pur_scale').value = data.settings.capexPurScale; if (data.settings.opexPurPercent) document.getElementById('opex_pur_percent').value = data.settings.opexPurPercent; if (data.settings.capexCompBaseCost) document.getElementById('capex_comp_base_cost').value = data.settings.capexCompBaseCost; if (data.settings.capexCompBaseCap) document.getElementById('capex_comp_base_cap').value = data.settings.capexCompBaseCap; if (data.settings.capexCompScale) document.getElementById('capex_comp_scale').value = data.settings.capexCompScale; if (data.settings.opexCompPercent) document.getElementById('opex_comp_percent').value = data.settings.opexCompPercent; document.getElementById('fresh_h2_cost').value = data.settings.freshCost || 2.5; document.getElementById('fuel_value').value = data.settings.fuelValue || 0.5; document.getElementById('fresh_impurity').value = data.settings.freshImpurity || 5.0; if (data.settings.opHours) document.getElementById('op_hours').value = data.settings.opHours; togglePressure(); togglePurifier(); changePurifierType(); } renderTables(); showToast(t('toast_proj_loaded'), 'success'); } else showToast(t('toast_load_invalid'), 'error'); } catch (e) { showToast(t('toast_load_err'), 'error'); } event.target.value = ''; }; reader.readAsText(file); }
+        function clearAllData() { if (confirm(t('msg_clear_all'))) { sources = []; sinks = []; projectMeta = { projectName: '', companyName: '', engineerName: '', notes: '', logoBase64: '' }; comparisonData = null; renderTables();['results', 'network', 'curve', 'table'].forEach(id => { document.getElementById(`badge-${id}`).classList.add('hidden-badge'); document.getElementById(`${id}-content`) && (document.getElementById(`${id}-content`).style.display = 'none'); document.getElementById(`${id}-hint`) && (document.getElementById(`${id}-hint`).style.display = 'flex'); }); document.getElementById('results-hint').style.display = 'flex'; document.getElementById('results-content').style.display = 'none'; showToast(t('toast_cleared'), 'success'); } }
+
+        // ── Math Engine & Extractor ─────────────────────────────────────────
+
+        function runProblemTable(currentSources, currentSinks, freshImp) {
+            let impSet = new Set(); impSet.add(freshImp); currentSources.forEach(s => impSet.add(s.impurity)); currentSinks.forEach(s => impSet.add(s.maxImp));
+            let C = Array.from(impSet).sort((a, b) => a - b), n = C.length;
+            let Fsr = new Array(n).fill(0), Fsk = new Array(n).fill(0);
+            currentSources.forEach(s => { let i = C.indexOf(s.impurity); Fsr[i] += s.flow; });
+            currentSinks.forEach(s => { let i = C.indexOf(s.maxImp); Fsk[i] += s.req; });
+            let ex_Net = new Array(n).fill(0), ex_Fc = new Array(n).fill(0), ex_m = new Array(n).fill(0), ex_cum_m = new Array(n).fill(0), ex_Ff = new Array(n).fill(0);
+            for (let k = 0; k < n; k++) { ex_Net[k] = Fsr[k] - Fsk[k]; ex_Fc[k] = k === 0 ? ex_Net[k] : ex_Fc[k - 1] + ex_Net[k]; }
+            for (let k = 0; k < n - 1; k++) { let dC = (C[k + 1] - C[k]) / 100; ex_m[k] = ex_Fc[k] * dC; ex_cum_m[k + 1] = ex_cum_m[k] + ex_m[k]; if (C[k + 1] > freshImp) ex_Ff[k + 1] = ex_cum_m[k + 1] / ((C[k + 1] - freshImp) / 100); }
+            let minFfk = 0; for (let k = 0; k < n; k++) if (ex_Ff[k] < minFfk) minFfk = ex_Ff[k]; let minFresh = minFfk < 0 ? -minFfk : 0;
+            let totalSrc = currentSources.reduce((s, x) => s + x.flow, 0), totalSnk = currentSinks.reduce((s, x) => s + x.req, 0);
+            let volDeficit = Math.max(0, totalSnk - totalSrc); if (volDeficit > minFresh) minFresh = volDeficit;
+            let pinchIndex = -1, closest = Infinity;
+            for (let k = 1; k < n; k++) { let sh = ex_cum_m[k] + minFresh * ((C[k] - freshImp) / 100); if (Math.abs(sh) < closest) { closest = Math.abs(sh); if (Math.abs(sh) < 0.01) pinchIndex = k; } }
+            let purgeFlow = Math.max(0, totalSrc + minFresh - totalSnk);
+            let purgeImpMass = currentSources.reduce((s, x) => s + (x.flow * x.impurity), 0) + minFresh * freshImp - currentSinks.reduce((s, x) => s + (x.req * x.maxImp), 0);
+            let purgeImp = purgeFlow > 0.001 ? purgeImpMass / purgeFlow : 0;
+            return { minFresh, purgeFlow, purgeImp, pinchIndex, Fsk, Fsr, ex_Net, ex_Fc, ex_m, ex_cum_m, ex_Ff, C, n };
+        }
+
+        function calculateConnections(freshTarget, freshImp, internalPurge, currentSources, currentSinks, isPressureEnabled) {
+            let activeSources = currentSources.map(s => ({ ...s, avail: s.flow, type: s.type || 'source' }));
+            if (freshTarget > 0.001) activeSources.push({ id: 'fresh_node', name: t('str_fresh_node'), flow: freshTarget, avail: freshTarget, impurity: freshImp, pressure: 9999, type: 'fresh' });
+            let activeSinks = currentSinks.map(s => ({ ...s, needed: s.req, currentFlow: 0, type: 'sink' }));
+            activeSinks.sort((a, b) => a.maxImp - b.maxImp);
+            let connections = [], totalCompPower_kW = 0;
+            let T1 = parseFloat(document.getElementById('comp_temp').value) || 300; let eff = (parseFloat(document.getElementById('comp_eff').value) || 75) / 100;
+            let gamma = 1.4, R = 8.314, factor = gamma / (gamma - 1);
+            function addConnection(src, snk, flow) {
+                if (flow <= 0.0001) return;
+                let needsComp = isPressureEnabled && (src.pressure < snk.pressure) && (src.id !== 'fresh_node') && (snk.id !== 'purge_node');
+                let compPower = 0;
+                if (needsComp) { let fks = (flow * unitFactors[currentUnit]) / 3600; compPower = fks * (R * T1 / eff) * factor * (Math.pow(snk.pressure / src.pressure, (gamma - 1) / gamma) - 1); totalCompPower_kW += compPower; }
+                let ex = connections.find(c => c.sourceId === src.id && c.sinkId === snk.id);
+                if (ex) { ex.flow += flow; if (needsComp) ex.compPower += compPower; }
+                else connections.push({ sourceId: src.id, sinkId: snk.id, flow, imp: src.impurity, needsCompressor: needsComp, compPower });
+                src.avail -= flow; snk.needed -= flow; snk.currentFlow += flow;
+            }
+            let sinksToProcess = activeSinks.filter(s => s.id !== 'purge_node');
+            for (let sink of sinksToProcess) {
+                while (sink.needed > 0.0001) {
+                    let cleanSrcs = activeSources.filter(s => s.impurity <= sink.maxImp && s.avail > 0.0001);
+                    let dirtySrcs = activeSources.filter(s => s.impurity > sink.maxImp && s.avail > 0.0001);
+                    if (isPressureEnabled) { cleanSrcs.sort((a, b) => { let aP = a.pressure >= sink.pressure ? 1 : 0, bP = b.pressure >= sink.pressure ? 1 : 0; return aP !== bP ? bP - aP : b.impurity - a.impurity; }); dirtySrcs.sort((a, b) => { let aP = a.pressure >= sink.pressure ? 1 : 0, bP = b.pressure >= sink.pressure ? 1 : 0; return aP !== bP ? bP - aP : a.impurity - b.impurity; }); }
+                    else { cleanSrcs.sort((a, b) => b.impurity - a.impurity); dirtySrcs.sort((a, b) => a.impurity - b.impurity); }
+                    if (cleanSrcs.length > 0 && dirtySrcs.length > 0) {
+                        let clean = cleanSrcs[0], dirty = dirtySrcs[0];
+                        if (Math.abs(sink.maxImp - clean.impurity) < 0.00001) { addConnection(clean, sink, Math.min(clean.avail, sink.needed)); continue; }
+                        let r = (dirty.impurity - sink.maxImp) / (sink.maxImp - clean.impurity);
+                        let fd = Math.min(dirty.avail, clean.avail / r, sink.needed / (1 + r)), fc = fd * r;
+                        if (fc < 0.0001 && fd < 0.0001) { addConnection(clean, sink, Math.min(clean.avail, sink.needed)); continue; }
+                        addConnection(clean, sink, fc); addConnection(dirty, sink, fd);
+                    } else if (cleanSrcs.length > 0) addConnection(cleanSrcs[0], sink, Math.min(cleanSrcs[0].avail, sink.needed));
+                    else if (dirtySrcs.length > 0) addConnection(dirtySrcs[0], sink, Math.min(dirtySrcs[0].avail, sink.needed));
+                    else break;
+                }
+            }
+            if (internalPurge > 0.001) {
+                activeSinks.push({ id: 'purge_node', name: t('str_purge_node'), req: internalPurge, type: 'purge', maxImp: '-', pressure: 0 });
+                let purgeSink = activeSinks[activeSinks.length - 1];
+                for (let src of activeSources) if (src.avail > 0.0001) addConnection(src, purgeSink, src.avail);
+            }
+            return { sources: activeSources, sinks: activeSinks, connections, totalCompPower: totalCompPower_kW };
+        }
+
+        // ── Core Engine Extracted for Reusability ──
+        function calculateScenarioEconomics(simType = 'default') {
+            let freshImp = parseFloat(document.getElementById('fresh_impurity').value);
+            let isPurifierEnabled = document.getElementById('enable_purifier').checked;
+            let isPressureEnabled = document.getElementById('enable_pressure').checked;
+            let opHours = parseFloat(document.getElementById('op_hours').value) || 8000;
+
+            let baseResult = runProblemTable(sources, sinks, freshImp);
+            let finalFreshTarget = baseResult.minFresh, finalPurgeTarget = baseResult.purgeFlow;
+            let activeSources = JSON.parse(JSON.stringify(sources)), activeSinks = JSON.parse(JSON.stringify(sinks));
+            let tableResultToDisplay = baseResult;
+            let purFeedFlowForCapex = 0;
+
+            if (isPurifierEnabled) {
+                let prodImp = parseFloat(document.getElementById('pur_prod_imp').value) || 0;
+                let tailImp = parseFloat(document.getElementById('pur_tail_imp').value) || 0;
+                let feedFlow = baseResult.purgeFlow, feedImp = baseResult.purgeImp, prodFlow = 0, tailFlow = feedFlow;
+                purFeedFlowForCapex = feedFlow;
+
+                if (feedFlow > 0 && tailImp > prodImp) {
+                    if (feedImp <= prodImp) { prodFlow = feedFlow; tailFlow = 0; } else if (feedImp >= tailImp) { prodFlow = 0; tailFlow = feedFlow; }
+                    else { prodFlow = feedFlow * ((tailImp - feedImp) / (tailImp - prodImp)); tailFlow = feedFlow - prodFlow; }
+                }
+                let tempSources = JSON.parse(JSON.stringify(sources)), toRemove = feedFlow;
+                let indices = tempSources.map((s, idx) => ({ idx, imp: s.impurity })).sort((a, b) => b.imp - a.imp).map(x => x.idx);
+                for (let i of indices) { if (toRemove <= 0.0001) break; if (tempSources[i].flow >= toRemove) { tempSources[i].flow -= toRemove; toRemove = 0; } else { toRemove -= tempSources[i].flow; tempSources[i].flow = 0; } }
+                tempSources = tempSources.filter(s => s.flow > 0.0001);
+
+                let prodPres = parseFloat(document.getElementById('pur_prod_pres').value) || 100;
+                let tailPres = parseFloat(document.getElementById('pur_tail_pres').value) || 100;
+
+                if (prodFlow > 0) tempSources.push({ id: 'src_purifier_top', name: t('str_rec_node'), flow: prodFlow, impurity: prodImp, pressure: prodPres, type: 'purifier' });
+                if (tailFlow > 0) tempSources.push({ id: 'src_purifier_bot', name: t('str_tail_node'), flow: tailFlow, impurity: tailImp, pressure: tailPres, type: 'tail' });
+
+                let newResult = runProblemTable(tempSources, sinks, freshImp);
+                finalFreshTarget = newResult.minFresh; finalPurgeTarget = newResult.purgeFlow;
+                tableResultToDisplay = newResult; activeSources = tempSources;
+
+                if (simType === 'default') {
+                    document.getElementById('pur_feed_flow').value = feedFlow.toFixed(2);
+                    document.getElementById('pur_feed_imp').value = feedImp.toFixed(2);
+                }
+            }
+
+            let networkData = calculateConnections(finalFreshTarget, freshImp, finalPurgeTarget, activeSources, activeSinks, isPressureEnabled);
+            let freshCost = parseFloat(document.getElementById('fresh_h2_cost').value) || 0;
+            let fuelValue = parseFloat(document.getElementById('fuel_value').value) || 0;
+            let elecCost = parseFloat(document.getElementById('elec_cost').value) || 0;
+
+            let purCapex = 0; let purMaintAnnual = 0;
+            if (isPurifierEnabled && purFeedFlowForCapex > 0) {
+                let baseCost = parseFloat(document.getElementById('capex_pur_base_cost').value) || 0;
+                let baseCap = parseFloat(document.getElementById('capex_pur_base_cap').value) || 1;
+                let scale = parseFloat(document.getElementById('capex_pur_scale').value) || 0.85;
+                let opexPercent = (parseFloat(document.getElementById('opex_pur_percent').value) || 0) / 100;
+                purCapex = baseCost * Math.pow((purFeedFlowForCapex / baseCap), scale);
+                purMaintAnnual = purCapex * opexPercent;
+            }
+
+            let compPower = networkData.totalCompPower || 0; // kW
+            let compCapex = 0; let compMaintAnnual = 0;
+            if (isPressureEnabled && compPower > 0) {
+                let baseCost = parseFloat(document.getElementById('capex_comp_base_cost').value) || 0;
+                let baseCap = parseFloat(document.getElementById('capex_comp_base_cap').value) || 1;
+                let scale = parseFloat(document.getElementById('capex_comp_scale').value) || 0.65;
+                let opexPercent = (parseFloat(document.getElementById('opex_comp_percent').value) || 0) / 100;
+                compCapex = baseCost * Math.pow((compPower / baseCap), scale);
+                compMaintAnnual = compCapex * opexPercent;
+            }
+
+            let totalCapex = purCapex + compCapex;
+            let totalMaintAnnual = purMaintAnnual + compMaintAnnual;
+            let maintOpexPerHour = totalMaintAnnual / opHours;
+
+            let baseMaterialOpexPerHour = (baseResult.minFresh * freshCost) - (baseResult.purgeFlow * fuelValue);
+            let finalMaterialOpexPerHour = (finalFreshTarget * freshCost) - (finalPurgeTarget * fuelValue);
+            let compOpexPerHour = compPower * elecCost; // kW * $/kWh = $/hr
+            let baseOpex = baseMaterialOpexPerHour;
+            let finalTotalOpex = finalMaterialOpexPerHour + compOpexPerHour + maintOpexPerHour;
+
+            let savingsBasis = baseOpex - finalTotalOpex;
+            let savingsYr = savingsBasis * opHours;
+
+            let paybackPeriod = t('str_unfeasible');
+            let paybackNum = 9999;
+            if (savingsYr > 0 && totalCapex > 0) { paybackNum = totalCapex / savingsYr; paybackPeriod = paybackNum.toFixed(2); }
+            else if (savingsYr > 0 && totalCapex === 0) { paybackNum = 0; paybackPeriod = t('str_immediate'); }
+
+            return {
+                tableResultToDisplay, finalFreshTarget, finalPurgeTarget, freshImp, networkData, isPressureEnabled,
+                purCapex, compCapex, totalCapex, baseOpex, finalTotalOpex, savingsBasis, savingsYr, paybackPeriod, paybackNum,
+                simType
+            };
+        }
+
+        // ── Routing Logic (Normal vs Comparative) ──
+        function triggerRunAnalysis() {
+            if (sources.length === 0 || sinks.length === 0) { showToast(t('toast_min_req'), 'error'); return; }
+            const btn = document.getElementById('mainRunBtn'); btn.classList.add('loading');
+
+            const isComparisonEnabled = document.getElementById('enable_comparison').checked;
+            const isPurifierEnabled = document.getElementById('enable_purifier').checked;
+
+            setTimeout(() => {
+                if (isComparisonEnabled && isPurifierEnabled) {
+                    runComparativeAnalysis();
+                } else {
+                    document.getElementById('comparison-section').style.display = 'none';
+                    comparisonData = null;
+                    document.getElementById('current-tech-badge').textContent = '';
+                    runSingleAnalysis();
+                }
+                btn.classList.remove('loading');
+            }, 500);
+        }
+
+        function runSingleAnalysis() {
+            const results = calculateScenarioEconomics('default');
+            lastNetworkData = results.networkData;
+            renderResultsToUI(results);
+            showToast(t('toast_analysis_done'), 'success');
+            switchTab('tab-results');
+        }
+
+        function runComparativeAnalysis() {
+            const originalType = document.getElementById('purifier_type').value;
+
+            document.getElementById('purifier_type').value = 'membrane';
+            changePurifierType();
+            const memResults = calculateScenarioEconomics('Membrane');
+
+            document.getElementById('purifier_type').value = 'psa';
+            changePurifierType();
+            const psaResults = calculateScenarioEconomics('PSA');
+
+            document.getElementById('purifier_type').value = originalType;
+            changePurifierType();
+
+            let simTypeLabel = 'Custom';
+            if (originalType === 'membrane') simTypeLabel = 'Membrane';
+            else if (originalType === 'psa') simTypeLabel = 'PSA';
+
+            const userResults = calculateScenarioEconomics(simTypeLabel);
+
+            let winner = null;
+            let memScore = (memResults.paybackNum > 0 && memResults.paybackNum < 9999) ? (100 / memResults.paybackNum) : (memResults.savingsYr > 0 ? 0.1 : -1);
+            let psaScore = (psaResults.paybackNum > 0 && psaResults.paybackNum < 9999) ? (100 / psaResults.paybackNum) : (psaResults.savingsYr > 0 ? 0.1 : -1);
+
+            if (memScore > psaScore) winner = 'Membrane';
+            else if (psaScore > memScore) winner = 'PSA';
+            else winner = (memResults.savingsYr >= psaResults.savingsYr) ? 'Membrane' : 'PSA';
+
+            comparisonData = { memResults, psaResults, winner };
+
+            updateComparisonUI(memResults, psaResults, winner);
+
+            lastNetworkData = userResults.networkData;
+            renderResultsToUI(userResults);
+
+            let techText = t('str_custom');
+            if (userResults.simType === 'Membrane') techText = t('str_mem');
+            else if (userResults.simType === 'PSA') techText = t('str_psa');
+            document.getElementById('current-tech-badge').textContent = `(${t('str_rec_note')} ${techText})`;
+
+            showToast(t('toast_comp_done'), 'success');
+            switchTab('tab-results');
+        }
+
+        function updateComparisonUI(mem, psa, winner) {
+            const section = document.getElementById('comparison-section');
+            const table = document.getElementById('comparisonTable');
+            const recBox = document.getElementById('recommendationBox');
+
+            const isMemWin = winner === 'Membrane';
+            const isPsaWin = winner === 'PSA';
+
+            table.innerHTML = `
+        <thead>
+            <tr>
+                <th>${t('str_comp_criteria')}</th>
+                <th class="${isMemWin ? 'winner-col' : ''}">${t('str_mem')} ${isMemWin ? '🏆' : ''}</th>
+                <th class="${isPsaWin ? 'winner-col' : ''}">${t('str_psa')} ${isPsaWin ? '🏆' : ''}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>${t('str_capex')}</td>
+                <td class="${isMemWin ? 'winner-col' : ''}">$${mem.totalCapex.toLocaleString('en-US', { maximumFractionDigits: 0 })}</td>
+                <td class="${isPsaWin ? 'winner-col' : ''}">$${psa.totalCapex.toLocaleString('en-US', { maximumFractionDigits: 0 })}</td>
+            </tr>
+            <tr>
+                <td>${t('str_net_sav')}</td>
+                <td class="${isMemWin ? 'winner-col' : ''}" style="color:${mem.savingsYr > 0 ? 'var(--green)' : 'var(--red)'}">$${mem.savingsYr.toLocaleString('en-US', { maximumFractionDigits: 0 })}</td>
+                <td class="${isPsaWin ? 'winner-col' : ''}" style="color:${psa.savingsYr > 0 ? 'var(--green)' : 'var(--red)'}">$${psa.savingsYr.toLocaleString('en-US', { maximumFractionDigits: 0 })}</td>
+            </tr>
+            <tr>
+                <td>${t('str_payback')}</td>
+                <td class="${isMemWin ? 'winner-col' : ''}" style="color:${mem.paybackNum < 9999 ? 'var(--green)' : 'var(--red)'}; font-weight:800;">${mem.paybackPeriod} ${t('str_years')}</td>
+                <td class="${isPsaWin ? 'winner-col' : ''}" style="color:${psa.paybackNum < 9999 ? 'var(--green)' : 'var(--red)'}; font-weight:800;">${psa.paybackPeriod} ${t('str_years')}</td>
+            </tr>
+            <tr>
+                <td>${t('str_rec_pur')}</td>
+                <td class="${isMemWin ? 'winner-col' : ''}">98.0%</td>
+                <td class="${isPsaWin ? 'winner-col' : ''}">99.9%</td>
+            </tr>
+        </tbody>
+    `;
+
+            if (winner) {
+                recBox.innerHTML = `
+            <i class="fa-solid fa-lightbulb"></i>
+            <div>
+                <strong style="display:block; margin-bottom:4px; font-size:15px;">${t('str_rec_tech')}${winner === 'Membrane' ? t('str_mem') : t('str_psa')}</strong>
+                <p>${t('str_rec_desc')}</p>
+            </div>
+        `;
+            }
+
+            section.style.display = 'block';
+        }
+
+        function renderResultsToUI(res) {
+            document.getElementById('res_fresh').textContent = res.finalFreshTarget.toFixed(2);
+            document.getElementById('res_purge').textContent = res.finalPurgeTarget.toFixed(2);
+
+            document.querySelectorAll('.time-basis-lbl').forEach(el => el.textContent = 'hr');
+
+            document.getElementById('res_base_opex').textContent = res.baseOpex.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('res_final_h2_opex').textContent = res.finalTotalOpex.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('res_save_hr').textContent = Math.abs(res.savingsBasis).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('res_save_yr').textContent = Math.abs(res.savingsYr).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+
+            document.getElementById('res_capex_pur').textContent = res.purCapex.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+            document.getElementById('res_capex_comp').textContent = res.compCapex.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+            document.getElementById('res_capex_total').textContent = res.totalCapex.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+            document.getElementById('res_payback').textContent = res.paybackPeriod;
+
+            const cardSave = document.getElementById('card_save_hr');
+            const cardPayback = document.getElementById('card_payback');
+            if (res.savingsBasis >= 0) {
+                document.getElementById('res_save_hr_sign').textContent = '+';
+                document.getElementById('res_save_yr_sign').textContent = '+';
+                cardSave.className = 'result-card rc-green';
+                cardPayback.style.borderColor = 'var(--green)';
+                cardPayback.style.background = 'linear-gradient(135deg, rgba(16,185,129,0.1), rgba(16,185,129,0.2))';
+                document.getElementById('res_payback').style.color = 'var(--green)';
+            } else {
+                document.getElementById('res_save_hr_sign').textContent = '-';
+                document.getElementById('res_save_yr_sign').textContent = '-';
+                cardSave.className = 'result-card rc-red';
+                cardPayback.style.borderColor = 'var(--red)';
+                cardPayback.style.background = 'linear-gradient(135deg, rgba(239,68,68,0.1), rgba(239,68,68,0.2))';
+                document.getElementById('res_payback').style.color = 'var(--red)';
+            }
+
+            renderCascadeTable(res.tableResultToDisplay);
+
+            window.lastChartParams = { res: res.tableResultToDisplay, freshTarget: res.finalFreshTarget, freshImp: res.freshImp };
+            drawCompositeCurveChart(res.tableResultToDisplay, res.finalFreshTarget, res.freshImp);
+
+            drawInteractiveNetwork(res.networkData, res.isPressureEnabled);
+
+            document.getElementById('results-hint').style.display = 'none';
+            document.getElementById('results-content').style.display = 'flex';
+            document.getElementById('results-content').style.flexDirection = 'column';
+            ['results', 'network', 'curve', 'table'].forEach(id => {
+                document.getElementById(`badge-${id}`).classList.remove('hidden-badge');
+                const hint = document.getElementById(`${id}-hint`); const content = document.getElementById(`${id}-content`);
+                if (hint) hint.style.display = 'none'; if (content) content.style.display = 'block';
+            });
+        }
+
+        function renderCascadeTable(res) {
+            const tbody = document.getElementById('cascadeBody'); tbody.innerHTML = '';
+            for (let k = 0; k < res.n; k++) {
+                let isPinch = (k === res.pinchIndex);
+                let dn = res.ex_Net[k] !== 0 ? res.ex_Net[k].toFixed(4) : '0', df = res.ex_Fc[k] !== 0 ? res.ex_Fc[k].toFixed(4) : '0';
+                let dm = k < res.n - 1 ? (res.ex_m[k] === 0 ? '0' : res.ex_m[k].toFixed(5)) : '-', dc = res.ex_cum_m[k] === 0 ? '0' : res.ex_cum_m[k].toFixed(5);
+                let dfk = res.ex_Ff[k] === 0 ? '0' : res.ex_Ff[k].toFixed(4);
+                tbody.innerHTML += `<tr class="${isPinch ? 'pinch-row' : ''}"><td>${k + 1}</td><td><strong>${res.C[k].toFixed(2)}</strong></td><td>${res.Fsk[k] === 0 ? '0' : res.Fsk[k].toFixed(2)}</td><td>${res.Fsr[k] === 0 ? '0' : res.Fsr[k].toFixed(2)}</td><td>${dn}</td><td style="color:var(--accent-hi); font-weight:800;">${df}</td><td>${dm}</td><td style="font-weight:800; color:${isPinch ? 'var(--red)' : 'var(--green)'}">${dc}</td><td style="color:var(--yellow); font-weight:800;">${dfk}</td></tr>`;
+            }
+        }
+
+        let hgccChartInstance = null;
+        function drawCompositeCurveChart(res, freshTarget, freshImp) {
+            const ctx = document.getElementById('pinchChart').getContext('2d');
+            if (hgccChartInstance) hgccChartInstance.destroy();
+            const rootStyles = getComputedStyle(document.documentElement);
+            const textColor = rootStyles.getPropertyValue('--text-2').trim() || '#94a3b8';
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+            const gridColor = (currentTheme === 'light' || currentTheme === 'green') ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.05)';
+            const accent = rootStyles.getPropertyValue('--accent').trim() || '#3b82f6';
+            const accentGlow = rootStyles.getPropertyValue('--accent-glow').trim() || 'rgba(59,130,246,0.1)';
+
+            let pts = []; for (let k = 0; k < res.n; k++) { let sh = res.ex_cum_m[k] + freshTarget * ((res.C[k] - freshImp) / 100); if (Math.abs(sh) < 0.001) sh = 0; pts.push({ x: sh, y: res.C[k] }); }
+            hgccChartInstance = new Chart(ctx, { type: 'line', data: { datasets: [{ label: 'Curve', data: pts, borderColor: accent, backgroundColor: accentGlow, borderWidth: 3, fill: true, tension: 0.1, pointBackgroundColor: pts.map((_, i) => i === res.pinchIndex ? '#ef4444' : accent), pointRadius: pts.map((_, i) => i === res.pinchIndex ? 8 : 5), pointBorderColor: 'transparent' }] }, options: { responsive: true, maintainAspectRatio: false, animation: false, plugins: { legend: { display: false } }, scales: { x: { type: 'linear', min: 0, grid: { color: gridColor }, ticks: { color: textColor }, title: { display: true, text: `${t('str_surplus')} (${currentUnit})`, color: textColor, font: { weight: 'bold', size: 14 } } }, y: { type: 'linear', grid: { color: gridColor }, ticks: { color: textColor }, title: { display: true, text: `${t('str_impurity')} (%)`, color: textColor, font: { weight: 'bold', size: 14 } } } } } });
+        }
+
+        let visNetworkInstance = null;
+        function drawInteractiveNetwork(data, isPressureEnabled) {
+            const container = document.getElementById('mynetwork');
+            const rootStyles = getComputedStyle(document.documentElement);
+            const accent = rootStyles.getPropertyValue('--accent').trim(), green = rootStyles.getPropertyValue('--green').trim(), orange = rootStyles.getPropertyValue('--orange').trim(), purple = rootStyles.getPropertyValue('--purple').trim(), text2 = rootStyles.getPropertyValue('--text-2').trim(), bgPanel2 = rootStyles.getPropertyValue('--bg-panel2').trim();
+
+            const nodesArray = [];
+            data.sources.forEach(src => { let bg = accent, pStr = (isPressureEnabled && src.type !== 'fresh') ? `\nP: ${src.pressure.toFixed(1)} bar` : ''; if (src.type === 'fresh') bg = green; else if (src.type === 'purifier') bg = purple; else if (src.type === 'tail') bg = '#d97706'; nodesArray.push({ id: src.id, label: `${src.name}\nF: ${src.flow.toFixed(1)}\nC: ${src.impurity.toFixed(1)}%${pStr}`, title: `${t('str_src_node')} ${src.name}`, shape: 'box', color: { background: bg, border: bgPanel2 }, font: { color: 'white', face: 'monospace', size: 13, multi: true, bold: true }, margin: 12, shadow: true, level: 0 }); });
+            data.sinks.forEach(snk => { let bg = orange, pStr = (isPressureEnabled && snk.type !== 'purge') ? `\nP: ${snk.pressure.toFixed(1)} bar` : ''; let labelText = `${snk.name}\nF: ${snk.req.toFixed(1)}\nMax C: ${snk.maxImp}%${pStr}`; if (snk.type === 'purge') { bg = '#ef4444'; labelText = `${snk.name}\nF: ${snk.req.toFixed(1)}`; } nodesArray.push({ id: snk.id, label: labelText, title: `${t('str_snk_node')} ${snk.name}`, shape: 'box', color: { background: bg, border: bgPanel2 }, font: { color: 'white', face: 'monospace', size: 13, multi: true, bold: true }, margin: 12, shadow: true, level: 1 }); });
+            const nodes = new vis.DataSet(nodesArray); const edgesArray = []; let maxFlow = Math.max(...data.connections.map(c => c.flow), 1);
+            data.connections.forEach(conn => { let lbl = `${conn.flow.toFixed(1)}`, ec = text2, dash = false, ew = Math.max(1.5, (conn.flow / maxFlow) * 8); if (conn.needsCompressor) { lbl += `\n[${conn.compPower.toFixed(1)} kW]`; ec = '#ef4444'; dash = [5, 5]; } edgesArray.push({ from: conn.sourceId, to: conn.sinkId, label: lbl, arrows: { to: { enabled: true, scaleFactor: 1.2 } }, color: { color: ec, highlight: accent }, width: ew, dashes: dash, font: { align: 'horizontal', background: bgPanel2, strokeWidth: 0, size: 11, face: 'monospace', bold: true, color: text2 }, smooth: { type: 'cubicBezier', forceDirection: 'horizontal', roundness: 0.4 } }); });
+            const edges = new vis.DataSet(edgesArray);
+            const options = { layout: { hierarchical: { direction: document.documentElement.dir === 'rtl' ? 'RL' : 'LR', sortMethod: 'directed', nodeSpacing: 120, levelSeparation: 450, treeSpacing: 150 } }, physics: { enabled: true, hierarchicalRepulsion: { centralGravity: 0, springLength: 200, springConstant: 0.01, nodeDistance: 150, damping: 0.09 }, solver: 'hierarchicalRepulsion' }, interaction: { dragNodes: true, dragView: true, zoomView: true, hover: true }, background: 'transparent' };
+
+            if (visNetworkInstance !== null) visNetworkInstance.destroy();
+            visNetworkInstance = new vis.Network(container, { nodes, edges }, options);
+            visNetworkInstance.on('stabilizationIterationsDone', () => { visNetworkInstance.setOptions({ physics: false }); });
+        }
+
+        function zoomNetwork(step) { if (!visNetworkInstance) return; const currentScale = visNetworkInstance.getScale(); const newScale = Math.max(0.1, currentScale + step); visNetworkInstance.moveTo({ scale: newScale, animation: { duration: 300, easingFunction: "easeInOutQuad" } }); }
+        function fitNetwork() { if (!visNetworkInstance) return; visNetworkInstance.fit({ animation: { duration: 500, easingFunction: "easeInOutQuad" } }); }
+
+        // ── Reports & PDF generation ──────────────────────────────────────────────────
+        function buildReportHTML() {
+            if (document.getElementById('badge-results').classList.contains('hidden-badge')) { showToast(t('toast_pdf_req'), 'warning'); return false; }
+
+            const container = document.getElementById('print-container'); container.innerHTML = '';
+
+            const freshTarget = document.getElementById('res_fresh').innerText;
+            const totalCapex = document.getElementById('res_capex_total').innerText;
+            const finalOpex = document.getElementById('res_final_h2_opex').innerText;
+            const netSave = document.getElementById('res_save_hr').innerText;
+            const saveSign = document.getElementById('res_save_hr_sign').innerText;
+            const isProfitable = saveSign.includes('+');
+            const payback = document.getElementById('res_payback').innerText;
+            const techBadge = document.getElementById('current-tech-badge').innerText;
+
+            let chartImgStr = ''; const chartCanvas = document.getElementById('pinchChart'); if (chartCanvas && chartCanvas.width > 10) chartImgStr = chartCanvas.toDataURL('image/png');
+            let netImgStr = ''; const netCanvas = document.querySelector('#mynetwork canvas'); if (netCanvas && netCanvas.width > 10) netImgStr = netCanvas.toDataURL('image/png');
+
+            const reportTitle = projectMeta.projectName ? projectMeta.projectName : t('pdf_main_title');
+            let metaHtml = `
+        <div class="pr-header">
+            <div style="flex: 1;">
+                <span class="pr-title">${t('pdf_main_title')}</span>
+                <span class="pr-subtitle">${reportTitle}</span>
+                <div class="pr-meta-info">
+                    ${projectMeta.companyName ? `<div><strong>${t('pdf_company')}</strong> ${projectMeta.companyName}</div>` : ''}
+                    ${projectMeta.engineerName ? `<div><strong>${t('pdf_engineer')}</strong> ${projectMeta.engineerName}</div>` : ''}
+                    <div><strong>${t('pdf_date')}</strong> ${new Date().toLocaleDateString('en-GB')}</div>
+                </div>
+            </div>
+            ${projectMeta.logoBase64 ? `<div class="pr-logo-box"><img src="${projectMeta.logoBase64}"></div>` : ''}
+        </div>
+    `;
+
+            // 1. Comparison Section (If applicable)
+            let compHtml = '';
+            if (comparisonData && comparisonData.winner) {
+                const mem = comparisonData.memResults;
+                const psa = comparisonData.psaResults;
+                const winner = comparisonData.winner;
+                const isMem = winner === 'Membrane';
+                const isPsa = winner === 'PSA';
+
+                compHtml = `
+        <div class="pr-section">
+            <div class="pr-sec-title-container">
+                <span class="pr-sec-title-main">${t('pdf_sec_1_ar')}</span>
+                <span dir="ltr" class="pr-sec-title-sub">${t('pdf_sec_1_en')}</span>
+            </div>
+            <table class="pr-comparison-table">
+                <thead>
+                    <tr>
+                        <th>${t('str_comp_criteria')}</th>
+                        <th class="${isMem ? 'winner-col' : ''}">${t('str_mem')}</th>
+                        <th class="${isPsa ? 'winner-col' : ''}">${t('str_psa')}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>${t('str_capex')}</td>
+                        <td class="${isMem ? 'winner-col' : ''}">$${mem.totalCapex.toLocaleString('en-US', { maximumFractionDigits: 0 })}</td>
+                        <td class="${isPsa ? 'winner-col' : ''}">$${psa.totalCapex.toLocaleString('en-US', { maximumFractionDigits: 0 })}</td>
+                    </tr>
+                    <tr>
+                        <td>${t('str_net_sav')}</td>
+                        <td class="${isMem ? 'winner-col' : ''}">$${mem.savingsYr.toLocaleString('en-US', { maximumFractionDigits: 0 })}</td>
+                        <td class="${isPsa ? 'winner-col' : ''}">$${psa.savingsYr.toLocaleString('en-US', { maximumFractionDigits: 0 })}</td>
+                    </tr>
+                    <tr>
+                        <td>${t('str_payback')}</td>
+                        <td class="${isMem ? 'winner-col' : ''}">${mem.paybackPeriod} ${t('str_years')}</td>
+                        <td class="${isPsa ? 'winner-col' : ''}">${psa.paybackPeriod} ${t('str_years')}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="pr-recommendation">
+                <div style="font-size: 24px;">💡</div>
+                <div>
+                    <strong style="display:block; margin-bottom: 5px;">${t('str_rec_tech')} ${winner === 'Membrane' ? t('str_mem') : t('str_psa')}</strong>
+                    ${t('str_rec_desc')} 
+                    <i>(${t('str_rec_note')} ${document.getElementById('purifier_type').options[document.getElementById('purifier_type').selectedIndex].text})</i>
+                </div>
+            </div>
+        </div>
+        `;
+            }
+
+            // 2. Main Executive Summary
+            let execTitleNum = comparisonData ? "2" : "1";
+            let html = metaHtml + compHtml + `
+        <div class="pr-section ${comparisonData ? 'print-page-break' : ''}">
+            <div class="pr-sec-title-container">
+                <span class="pr-sec-title-main">${execTitleNum}. ${t('pdf_sec_exec_ar')} ${techBadge}</span>
+                <span dir="ltr" class="pr-sec-title-sub">${t('pdf_sec_exec_en')}</span>
+            </div>
+            <div class="pr-grid">
+                <div class="pr-card"><span class="pr-card-lbl">${t('pdf_card_fresh')}</span><span class="pr-card-val">${freshTarget} <span class="pr-unit">${currentUnit}</span></span></div>
+                <div class="pr-card"><span class="pr-card-lbl">${t('pdf_card_capex')}</span><span class="pr-card-val" style="color: #8b5cf6;">$${totalCapex}</span></div>
+                <div class="pr-card"><span class="pr-card-lbl">${t('pdf_card_new_op')}</span><span class="pr-card-val">$${finalOpex} <span class="pr-unit">/hr</span></span></div>
+                <div class="pr-card"><span class="pr-card-lbl">${t('pdf_card_sav')}</span><span class="pr-card-val ${isProfitable ? 'green' : 'red'}">${saveSign}$${netSave} <span class="pr-unit">/hr</span></span></div>
+                <div class="pr-card" style="width: 100%; text-align: center; background: ${isProfitable ? '#f0fdf4' : '#fef2f2'}; border-color: ${isProfitable ? '#86efac' : '#fca5a5'};">
+                    <span class="pr-card-lbl">${t('pdf_card_pb')}</span>
+                    <span class="pr-card-val ${isProfitable ? 'green' : 'red'}" style="font-size: 28px;">${payback} <span class="pr-unit">${t('str_years')}</span></span>
+                </div>
+            </div>
+        </div>
+    `;
+
+            let num = parseInt(execTitleNum) + 1;
+            if (netImgStr) html += `<div class="pr-section print-page-break"><div class="pr-sec-title-container"><span class="pr-sec-title-main">${num++}. ${t('pdf_sec_net_ar')}</span><span dir="ltr" class="pr-sec-title-sub">${t('pdf_sec_net_en')}</span></div><div class="pr-img-container"><img src="${netImgStr}"></div></div>`;
+            if (chartImgStr) html += `<div class="pr-section print-page-break"><div class="pr-sec-title-container"><span class="pr-sec-title-main">${num++}. ${t('pdf_sec_curve_ar')}</span><span dir="ltr" class="pr-sec-title-sub">${t('pdf_sec_curve_en')}</span></div><div class="pr-img-container"><img src="${chartImgStr}"></div></div>`;
+
+            const tableBodyHtml = document.getElementById('cascadeBody').innerHTML;
+            html += `
+        <div class="pr-section print-page-break">
+            <div class="pr-sec-title-container"><span class="pr-sec-title-main">${num++}. ${t('pdf_sec_table_ar')}</span><span dir="ltr" class="pr-sec-title-sub">${t('pdf_sec_table_en')}</span></div>
+            <table class="pr-table"><thead><tr><th>K</th><th>Ck (%)</th><th>Fsk</th><th>Fsr</th><th>Fsr − Fsk</th><th>Fc.k</th><th>m</th><th>cum m</th><th>Ff.k</th></tr></thead><tbody>${tableBodyHtml.replace(/var\(--[^\)]+\)/g, '#000')}</tbody></table>
+        </div>
+    `;
+
+            if (projectMeta.notes && projectMeta.notes.trim() !== '') {
+                html += `<div class="pr-section print-page-break"><div class="pr-sec-title-container"><span class="pr-sec-title-main">${num++}. ${t('pdf_sec_notes_ar')}</span><span dir="ltr" class="pr-sec-title-sub">${t('pdf_sec_notes_en')}</span></div><div class="pr-notes-box">${projectMeta.notes}</div></div>`;
+            }
+
+            // بصمة الفريق في نهاية التقرير المطبوع
+            html += `
+                <div style="margin-top: 50px; padding-top: 20px; border-top: 2px solid #cbd5e1; text-align: center; font-family: 'Cairo', sans-serif; clear: both; page-break-inside: avoid;">
+                    <div style="font-size: 16px; font-weight: 800; color: #0f172a; margin-bottom: 6px;">
+                        Developed & Engineered by: 
+                        <span style="color: #3b82f6;">Mahmoud Fathy</span> & <span style="color: #3b82f6;">Soliman Atallah</span>
+                    </div>
+                    <div style="font-size: 13px; font-weight: 600; color: #475569;">
+                        Free Palestene Team © 2026 | Faculty of Petroleum and Mining Engineering, Suez University
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+
+            const pinchRows = container.querySelectorAll('.pinch-row');
+            pinchRows.forEach(row => { row.className = 'pinch'; });
+
+            return true;
+        }
+
+        function handlePrintAction() { if (buildReportHTML()) window.print(); }
+
+        function handlePDFAction() {
+            if (!buildReportHTML()) return;
+            showToast(t("toast_pdf_gen"), "info");
+
+            const element = document.getElementById("print-container");
+            const appWrapper = document.getElementById("app-wrapper");
+
+            // 1. حفظ إعدادات الـ body الأصلية عشان نرجعها بعد الطباعة
+            const origOverflow = document.body.style.overflow;
+            const origHeight = document.body.style.height;
+
+            // 2. إخفاء واجهة التطبيق
+            appWrapper.style.display = "none";
+
+            // 3. إصلاح "الصفحة البيضاء": فك قفل طول الصفحة عشان التقرير ياخد مساحته الطبيعية
+            document.body.style.overflow = "visible";
+            document.body.style.height = "auto";
+
+            // 4. إظهار التقرير
+            element.style.display = "block";
+
+            // 5. 🚀 إصلاح "القص": إجبار التقرير على الالتصاق باليسار (حتى في اللغة العربية)
+            // top: 0, right: auto, bottom: 0, left: 0
+            element.style.setProperty("position", "static", "important");
+            element.style.setProperty("margin", "0 auto 0 0", "important");
+
+            // نطلع لأول الصفحة فوق عشان نضمن إن الصورة تبدأ من أول التقرير
+            window.scrollTo(0, 0);
+
+            // مهلة نص ثانية بس عشان المتصفح يرسم الجداول والصور
+            setTimeout(() => {
+                const pName = projectMeta.projectName ? projectMeta.projectName.replace(/\s+/g, "_") : "H2_Pinch";
+                const opt = {
+                    margin: [10, 10, 10, 10],
+                    filename: pName + "_Report.pdf",
+                    image: { type: "jpeg", quality: 1 },
+                    pagebreak: { mode: ["css", "legacy"], before: ".print-page-break" },
+                    html2canvas: {
+                        scale: 2,
+                        useCORS: true,
+                        logging: false
+                        // شيلنا إحداثيات الـ width والـ x عشان المكتبة تقرأ الحجم الطبيعي للتقرير براحتها
+                    },
+                    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+                };
+
+                html2pdf().set(opt).from(element).save().then(() => {
+                    // استرجاع كل شيء كما كان بعد نجاح التحميل
+                    element.style.display = "none";
+                    element.style.margin = "0 auto";
+                    appWrapper.style.display = "flex";
+
+                    // إرجاع قيود الـ body لحفظ تصميم التطبيق
+                    document.body.style.overflow = origOverflow;
+                    document.body.style.height = origHeight;
+
+                    showToast(t("toast_pdf_done"), "success");
+                }).catch((err) => {
+                    console.error(err);
+                    // استرجاع كل شيء لو حصل خطأ
+                    element.style.display = "none";
+                    element.style.margin = "0 auto";
+                    appWrapper.style.display = "flex";
+
+                    document.body.style.overflow = origOverflow;
+                    document.body.style.height = origHeight;
+
+                    showToast(t("toast_pdf_err"), "error");
+                });
+            }, 500);
+        }
+        // initialization
+        updateUnitLabels(); renderTables();
+
+    </script>
+</body>
+
+</html>
