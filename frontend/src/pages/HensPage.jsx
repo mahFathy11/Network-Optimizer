@@ -877,7 +877,7 @@ export default function HensPage() {
     };
 
     try {
-      const res = await fetch(`http://localhost:8000${endpoint}`, {
+      const res = await fetch(`https://mahfathy-network.hf.space${endpoint}`, {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
         body:    JSON.stringify(payload),
